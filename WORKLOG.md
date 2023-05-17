@@ -1,6 +1,6 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Brian Li
 
 ### date x
 
@@ -11,7 +11,7 @@ info
 info
 
 
-## GROUP MEMBER 2
+## Jason Lin
 
 ### date x
 
@@ -20,3 +20,5 @@ info
 ### date y
 
 info
+
+## Resources

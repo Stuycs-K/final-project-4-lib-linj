@@ -40,18 +40,19 @@ public class Matrix{
   }
 
   public Matrix mult(Matrix a){
-    if (m[0].length == a.length){
-      int[][] temp = new int[this.r][a[0].length];
-      for (int i = 0; temp.length; i++){
-        for (int j = 0; temp[0].length; j++){
-          temp[i][j] += m[j][i] * a[i][j];
+    int[][] temp = new int[1][1];
+    if (m[0].length == a.m.length){
+      temp = new int[this.r][a.m[0].length];
+      for (int i = 0; i < temp.length; i++){
+        for (int j = 0; j < temp[0].length; j++){
+          temp[i][j] += m[j][i] * a.m[i][j];
         }
       }
-      return new Matrix(temp);
     } else{
       System.out.println("invalid dimensions");
       System.exit(0);
     }
+    return new Matrix(temp);
   }
 
   // public String toString(){

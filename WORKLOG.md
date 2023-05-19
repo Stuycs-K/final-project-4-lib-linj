@@ -18,11 +18,11 @@ info
 
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  
 [Known Plaintext Attack](https://www.nku.edu/~christensen/092mat483%20known%20plaintext%20attack%20of%20Hill%20cipher.pdf)
-Added a file reading method.
+- Added a file reading method.
 
-### date y
+### 05/19/2023
 
-info
+- Made a basic skeleton of what the encode function should do. 
 
 ## Resources
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  

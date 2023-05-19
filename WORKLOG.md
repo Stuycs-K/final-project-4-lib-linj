@@ -2,9 +2,10 @@
 
 ## Brian Li
 
-### date x
+### 05/19/2023
 
-info
+- Developed a basic program for a Matrix object to be used for the Hill Cipher.
+  - Includes an identity method, matrix multiplication method for now. 
 
 ### date y
 

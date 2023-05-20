@@ -27,3 +27,4 @@ info
 ## Resources
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  
 [Known Plaintext Attack](https://www.nku.edu/~christensen/092mat483%20known%20plaintext%20attack%20of%20Hill%20cipher.pdf)
+[Cofactor Expansions](https://textbooks.math.gatech.edu/ila/determinants-cofactors.html)

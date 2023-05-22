@@ -230,6 +230,16 @@ public class Matrix{
     }
   }
 
+  public String getAlpha() {
+    String str = "";
+    for (int i = 0; i < r; i++) {
+      for (int j = 0; j < c; j++) {
+        str += (char)(int)((m[i][j] + 65));
+      }
+    }
+    return str;
+  }
+
   // testing
   public static void main(String[] args) {
     Matrix test = new Matrix(4, 3);

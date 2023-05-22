@@ -1,8 +1,4 @@
-What is the modular multiplicative inverse of the matrix.
-The matrix is a 3by3 matrix
-6 24 1
-13 16 10
-20 17 15# Work Log
+# Work Log
 
 ## Brian Li
 

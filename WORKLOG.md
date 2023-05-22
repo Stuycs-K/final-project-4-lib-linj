@@ -1,4 +1,8 @@
-# Work Log
+What is the modular multiplicative inverse of the matrix.
+The matrix is a 3by3 matrix
+6 24 1
+13 16 10
+20 17 15# Work Log
 
 ## Brian Li
 
@@ -17,8 +21,8 @@
 
 ### 05/18/2023
 
-[Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  
-[Known Plaintext Attack - NKU](https://www.nku.edu/~christensen/092mat483%20known%20plaintext%20attack%20of%20Hill%20cipher.pdf)
+- [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  
+- [Known Plaintext Attack - NKU](https://www.nku.edu/~christensen/092mat483%20known%20plaintext%20attack%20of%20Hill%20cipher.pdf)
 - Added a file reading method.
 
 ### 05/19/2023
@@ -29,9 +33,12 @@
 
 - Finished encode method in Hill to properly pad the string if not long enough.
 - Added a getAlpha method to Matrix to convert the matrix back to text.
+- Researched how decryption worked since it was not just the inverse of a matrix.
+    - [Modular Arithmetic regarding Modular Multiplicative Inverse Wikipedia](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse#Modular_arithmetic)  
 
 ## Resources
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  
 [Known Plaintext Attack - NKU](https://www.nku.edu/~christensen/092mat483%20known%20plaintext%20attack%20of%20Hill%20cipher.pdf)  
 [Cofactor Expansions](https://textbooks.math.gatech.edu/ila/determinants-cofactors.html)  
 [Known Plaintext Attack - WCSU](https://sites.wcsu.edu/mbxml/html/sample_hill_analysis_kpt.html)  
+[Modular Arithmetic regarding Modular Multiplicative Inverse Wikipedia](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse#Modular_arithmetic)  

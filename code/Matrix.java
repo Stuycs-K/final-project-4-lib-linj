@@ -206,6 +206,30 @@ public class Matrix{
     return new Matrix(modded);
   }
 
+  // check if matrix's determinant is coprime with a val
+  public boolean isCoprimeWith(int val){
+    int determinant = (int)getDeterminant();
+    return (gcd(determinant, val) == 1);
+  }
+
+  // old algo from apcs
+  public static int gcd(int n1, int n2){
+    // check for 0s, equality first
+    if (n1 == 0 || n2 == 0){
+      return 0;
+    }
+    else if (n1 == n2){
+      return n1;
+    }
+
+    // recursive call
+    if (n1 > n2){
+      return gcd(n1-n2, n2);
+    } else{
+      return gcd(n1, n2-n1);
+    }
+  }
+
   // testing
   public static void main(String[] args) {
     Matrix test = new Matrix(4, 3);

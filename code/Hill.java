@@ -3,7 +3,12 @@ import java.util.*;
 
 public class Hill {
   public static void main(String[] args) {
-    System.out.println(encode(args[0], args[1]));
+    if (args[0].equals("encode")) {
+        System.out.println(encode(args[1], args[2]));
+    }
+    else if (args[0].equals("decode")) {
+        System.out.println(decode(args[1], args[2]));
+    }
   }
 
   public static String encode(String fileToEncode, String keyFile) {
@@ -19,7 +24,7 @@ public class Hill {
         double[][] mat = new double[(int)Math.sqrt(l)][(int)Math.sqrt(l)];
         for (int i = 0; i < mat[0].length; i++) {
             for (int j = 0; j < mat.length; j++) {
-                char c = key.charAt(i*3 + j);
+                char c = key.charAt(i*mat.length + j);
                 mat[i][j] = (double)(c-65);
             }
         }
@@ -38,9 +43,7 @@ public class Hill {
         contents += "Z";
     }
     
-
     for (int i = 0; i < contents.length(); i += k.r) {
-        // possible edge case deal with later
         String temp = contents.substring(i, i + k.r);
         double[][] phrase = new double[k.r][1];
         for (int rows = 0; rows < phrase.length; rows++) {
@@ -57,6 +60,60 @@ public class Hill {
         encodedMessage.append(encodedPart.getAlpha());
     } 
     return encodedMessage.toString();
+  }
+
+  public static String decode(String fileToEncode, String keyFile) {
+    StringBuilder decodedMessage = new StringBuilder();
+
+    String key = readFile(keyFile);
+    String contents = readFile(fileToEncode);
+
+    Matrix k = new Matrix();
+
+    int l = key.length();
+    // perfect square for key length
+    if ((int)Math.sqrt(l) * Math.sqrt(l) == l) {
+        double[][] mat = new double[(int)Math.sqrt(l)][(int)Math.sqrt(l)];
+        for (int i = 0; i < mat[0].length; i++) {
+            for (int j = 0; j < mat.length; j++) {
+                char c = key.charAt(i*mat.length + j);
+                mat[i][j] = (double)(c-65);
+            }
+        }
+        k = new Matrix(mat);
+    }
+    else {
+        System.out.println("Key is not sufficient to create an n by n matrix.");
+        System.exit(0);
+    }
+    System.out.println(k);
+    System.out.println(k.isCoprimeWith(26));
+    // System.out.println(k.getInverse().matrixMod(26));
+    k = k.getInverse().matrixMod(26);
+
+    while (contents.length() % k.r != 0) {
+        contents += "Z";
+    }
+    
+    for (int i = 0; i < contents.length(); i += k.r) {
+        // possible edge case deal with later
+        String temp = contents.substring(i, i + k.r);
+        double[][] phrase = new double[k.r][1];
+        for (int rows = 0; rows < phrase.length; rows++) {
+            char c = temp.charAt(rows);
+            phrase[rows][0] = (double)(c-65);
+        }
+        Matrix part = new Matrix(phrase);
+
+        // System.out.println(part.toString());
+
+        Matrix decodedPart = k.mult(part);
+        decodedPart = decodedPart.matrixMod(26);
+
+        decodedMessage.append(decodedPart.getAlpha());
+    } 
+
+    return decodedMessage.toString();
   }
 
   

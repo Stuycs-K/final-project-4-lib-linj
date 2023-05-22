@@ -25,7 +25,7 @@ public class Hill {
         }
         k = new Matrix(mat);
 
-        System.out.println(k.toString());
+        // System.out.println(k.toString());
 
     }
     else {
@@ -49,12 +49,12 @@ public class Hill {
         }
         Matrix part = new Matrix(phrase);
 
-        System.out.println(part.toString());
+        // System.out.println(part.toString());
 
         Matrix encodedPart = k.mult(part);
         encodedPart = encodedPart.matrixMod(26);
 
-        encodedMessage.append(encodedPart.toString());
+        encodedMessage.append(encodedPart.getAlpha());
     } 
     return encodedMessage.toString();
   }

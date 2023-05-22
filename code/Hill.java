@@ -3,16 +3,18 @@ import java.util.*;
 
 public class Hill {
   public static void main(String[] args) {
-    encode(args[0], args[1]);
+    System.out.println(encode(args[0], args[1]));
   }
 
   public static String encode(String fileToEncode, String keyFile) {
     String key = readFile(keyFile);
-    String file = readFile(fileToEncode);
+    String contents = readFile(fileToEncode);
     StringBuilder encodedMessage = new StringBuilder();
 
-    Matrix k;
+    Matrix k = new Matrix();
+
     int l = key.length();
+    // perfect square for key length
     if ((int)Math.sqrt(l) * Math.sqrt(l) == l) {
         double[][] mat = new double[(int)Math.sqrt(l)][(int)Math.sqrt(l)];
         for (int i = 0; i < mat[0].length; i++) {
@@ -22,23 +24,32 @@ public class Hill {
             }
         }
         k = new Matrix(mat);
+
         System.out.println(k.toString());
+
     }
     else {
         System.out.println("Key is not sufficient to create an n by n matrix.");
         System.exit(0);
     }
+    
 
-    for (int i = 0; i < file.length(); i += 1) {
-        // Matrix f = new Matrix();
-        // convert to matrix
+    for (int i = 0; i < contents.length(); i += k.r) {
+        // possible edge case deal with later
+        String temp = contents.substring(i, i + k.r);
+        double[][] phrase = new double[k.r][1];
+        for (int rows = 0; rows < phrase.length; rows++) {
+            char c = temp.charAt(rows);
+            phrase[rows][0] = (double)(c-65);
+        }
+        Matrix part = new Matrix(phrase);
 
-        // if (remaining file not enough pad with 27?) {
-        //     pad matrix
-        // }
+        System.out.println(part.toString());
 
-        // f.mult(k);
-        // encodedMessage.append("something");
+        Matrix encodedPart = k.mult(part);
+        encodedPart = encodedPart.matrixMod(26);
+
+        encodedMessage.append(encodedPart.toString());
     } 
     return encodedMessage.toString();
   }

@@ -32,6 +32,11 @@ public class Hill {
         System.out.println("Key is not sufficient to create an n by n matrix.");
         System.exit(0);
     }
+
+    // pad with Z's
+    while (contents.length() % k.r != 0) {
+        contents += "Z";
+    }
     
 
     for (int i = 0; i < contents.length(); i += k.r) {

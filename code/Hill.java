@@ -43,6 +43,8 @@ public class Hill {
     return encodedMessage.toString();
   }
 
+  
+
   public static String readFile(String file) {
       String fileContent = "";
       try {

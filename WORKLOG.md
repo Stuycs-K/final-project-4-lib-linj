@@ -25,6 +25,11 @@
 
 - Made a basic skeleton of what the encode function should do.
 
+### 05/22/2023
+
+- Finished encode method in Hill to properly pad the string if not long enough.
+- Added a getAlpha method to Matrix to convert the matrix back to text.
+
 ## Resources
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  
 [Known Plaintext Attack - NKU](https://www.nku.edu/~christensen/092mat483%20known%20plaintext%20attack%20of%20Hill%20cipher.pdf)  

@@ -86,10 +86,18 @@ public class Hill {
         System.out.println("Key is not sufficient to create an n by n matrix.");
         System.exit(0);
     }
-    System.out.println(k);
-    System.out.println(k.isCoprimeWith(26));
-    // System.out.println(k.getInverse().matrixMod(26));
-    k = k.getInverse().matrixMod(26);
+
+    /*
+     * Steps to get the decrypting matrix
+     * Check if matrix has modular multiplicative inverse
+     * It does if the determinant has a modular inverse
+     * This is the case if a * det = 1 (n mod 26)
+     * That is that the gcd between det and 26 is 1 or that two the two numbers are coprime.
+     * In that case we get the inverse of the matrix
+     * Multiply every element with the modular inverse of the determinant.
+     * Then mod each value by 26.
+     */
+
 
     while (contents.length() % k.r != 0) {
         contents += "Z";

@@ -32,9 +32,15 @@
 - Researched how decryption worked since it was not just the inverse of a matrix.
     - [Modular Arithmetic regarding Modular Multiplicative Inverse Wikipedia](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse#Modular_arithmetic)  
 
+### 05/23/2023
+ - Found more information regarding finding a modular multiplicative inverse.
+    - [Extended Euclidean Algorithm](https://www.extendedeuclideanalgorithm.com/xea.php)  
+ - Working decrypt by applying the extended euclidean algorithm to find the appropriate matrix used for decrypting.
+
 ## Resources
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  
 [Known Plaintext Attack - NKU](https://www.nku.edu/~christensen/092mat483%20known%20plaintext%20attack%20of%20Hill%20cipher.pdf)  
 [Cofactor Expansions](https://textbooks.math.gatech.edu/ila/determinants-cofactors.html)  
 [Known Plaintext Attack - WCSU](https://sites.wcsu.edu/mbxml/html/sample_hill_analysis_kpt.html)  
 [Modular Arithmetic regarding Modular Multiplicative Inverse Wikipedia](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse#Modular_arithmetic)  
+[Extended Euclidean Algorithm](https://www.extendedeuclideanalgorithm.com/xea.php)  

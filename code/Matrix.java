@@ -192,6 +192,16 @@ public class Matrix{
     return new Matrix(scaled);
   }
 
+  public Matrix scalarMult(double scalar){
+    double[][] scaled = new double[r][c];
+    for (int i = 0; i < r; i++){
+      for (int j = 0; j < c; j++){
+        scaled[i][j] = m[i][j] * scalar;
+      }
+    }
+    return new Matrix(scaled);
+  }
+
   public Matrix matrixMod(int modVal){
     double[][] modded = new double[r][c];
     for (int i = 0; i < r; i++){

@@ -77,9 +77,11 @@ public class Hill {
     while (contents.length() % k.r != 0) {
         contents += "Z";
     }
-    
+    decodedMessage.append("test");
+
     for (int i = 0; i < contents.length(); i += k.r) {
         String temp = contents.substring(i, i + k.r);
+        System.out.println(temp);
         double[][] phrase = new double[k.r][1];
         for (int rows = 0; rows < phrase.length; rows++) {
             char c = temp.charAt(rows);
@@ -90,6 +92,8 @@ public class Hill {
         // System.out.println(part.toString());
 
         Matrix decodedPart = k.mult(part);
+        // System.out.println(k);
+        System.out.println(decodedPart);
         decodedPart = decodedPart.matrixMod(26);
 
         decodedMessage.append(decodedPart.getAlpha());

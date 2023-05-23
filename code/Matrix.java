@@ -224,20 +224,22 @@ public class Matrix{
 
   // old algo from apcs
   public static int gcd(int n1, int n2){
-    // check for 0s, equality first
-    if (n1 == 0 || n2 == 0){
-      return 0;
-    }
-    else if (n1 == n2){
-      return n1;
+    int smaller;
+    int counter = 1;
+    int accumulatedGCD = 1;
+    if (n1 > n2){
+      smaller = n2;
+    } else{
+      smaller = n1;
     }
 
-    // recursive call
-    if (n1 > n2){
-      return gcd(n1-n2, n2);
-    } else{
-      return gcd(n1, n2-n1);
+    while (counter <= smaller){
+      if (n1 % counter == 0 && n2 % counter == 0){
+        accumulatedGCD = counter;
+      }
+      counter++;
     }
+    return accumulatedGCD;  
   }
 
   public String getAlpha() {

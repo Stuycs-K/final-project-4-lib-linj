@@ -3,7 +3,10 @@ import java.util.*;
 
 public class Hill {
   public static void main(String[] args) {
-    if (args[0].equals("encode")) {
+    if (args.length == 0) {
+        System.out.println(getMultModInverse(9, 26));
+    }
+    else if (args[0].equals("encode")) {
         System.out.println(encode(args[1], args[2]));
     }
     else if (args[0].equals("decode")) {
@@ -60,6 +63,17 @@ public class Hill {
      * Multiply every element with the modular inverse of the determinant.
      * Then mod each value by 26.
      */
+    
+     double det = k.getDeterminant();
+     k = k.getInverse();
+    //  System.out.println(k);
+     k = k.scalarMult(det);
+     int modular = getMultModInverse((int)det, 26);
+     k = k.matrixMod(26);
+     k = k.scalarMult((double)modular);
+     k = k.matrixMod(26);
+
+    //  System.out.println(k);
 
 
     while (contents.length() % k.r != 0) {
@@ -111,6 +125,26 @@ public class Hill {
     }
     return k;
   }  
+
+  // getMultModInverse(determinant, 26)
+  public static int getMultModInverse(int a, int b) {
+    return getMultModInverse_r(a, b, a/b, a%b, 1, 0, 1, 0, 1, -1*(a/b));
+  }
+
+  public static int getMultModInverse_r(int a, int b, int q, int r, int s1, int s2, int s3, int t1, int t2, int t3) {
+    if (r == 0) {
+        return s2;
+    }
+    else {
+        int newA = b;
+        int newB = r;
+        int newQ = newA/newB;
+        int newR = newA % newB;
+        int newS3 = s2 - newQ * s3;
+        int newT3 = t2 - newQ * t3;
+        return getMultModInverse_r(newA, newB, newQ, newR, s2, s3, newS3, t2, t3, newT3);
+    }
+  }
 
   public static String readFile(String file) {
       String fileContent = "";

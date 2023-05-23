@@ -16,27 +16,7 @@ public class Hill {
     String contents = readFile(fileToEncode);
     StringBuilder encodedMessage = new StringBuilder();
 
-    Matrix k = new Matrix();
-
-    int l = key.length();
-    // perfect square for key length
-    if ((int)Math.sqrt(l) * Math.sqrt(l) == l) {
-        double[][] mat = new double[(int)Math.sqrt(l)][(int)Math.sqrt(l)];
-        for (int i = 0; i < mat[0].length; i++) {
-            for (int j = 0; j < mat.length; j++) {
-                char c = key.charAt(i*mat.length + j);
-                mat[i][j] = (double)(c-65);
-            }
-        }
-        k = new Matrix(mat);
-
-        // System.out.println(k.toString());
-
-    }
-    else {
-        System.out.println("Key is not sufficient to create an n by n matrix.");
-        System.exit(0);
-    }
+    Matrix k = generateKeyMatrix(key);
 
     // pad with Z's
     while (contents.length() % k.r != 0) {
@@ -68,24 +48,7 @@ public class Hill {
     String key = readFile(keyFile);
     String contents = readFile(fileToEncode);
 
-    Matrix k = new Matrix();
-
-    int l = key.length();
-    // perfect square for key length
-    if ((int)Math.sqrt(l) * Math.sqrt(l) == l) {
-        double[][] mat = new double[(int)Math.sqrt(l)][(int)Math.sqrt(l)];
-        for (int i = 0; i < mat[0].length; i++) {
-            for (int j = 0; j < mat.length; j++) {
-                char c = key.charAt(i*mat.length + j);
-                mat[i][j] = (double)(c-65);
-            }
-        }
-        k = new Matrix(mat);
-    }
-    else {
-        System.out.println("Key is not sufficient to create an n by n matrix.");
-        System.exit(0);
-    }
+    Matrix k = generateKeyMatrix(key);
 
     /*
      * Steps to get the decrypting matrix
@@ -124,7 +87,30 @@ public class Hill {
     return decodedMessage.toString();
   }
 
-  
+  public static Matrix generateKeyMatrix(String key) {
+    Matrix k = new Matrix();
+
+    int l = key.length();
+    // perfect square for key length
+    if ((int)Math.sqrt(l) * Math.sqrt(l) == l) {
+        double[][] mat = new double[(int)Math.sqrt(l)][(int)Math.sqrt(l)];
+        for (int i = 0; i < mat[0].length; i++) {
+            for (int j = 0; j < mat.length; j++) {
+                char c = key.charAt(i*mat.length + j);
+                mat[i][j] = (double)(c-65);
+            }
+        }
+        k = new Matrix(mat);
+
+        // System.out.println(k.toString());
+
+    }
+    else {
+        System.out.println("Key is not sufficient to create an n by n matrix.");
+        System.exit(0);
+    }
+    return k;
+  }  
 
   public static String readFile(String file) {
       String fileContent = "";

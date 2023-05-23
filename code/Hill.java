@@ -7,16 +7,17 @@ public class Hill {
         System.out.println(getMultModInverse(9, 26));
     }
     else if (args[0].equals("encode")) {
-        System.out.println(encode(args[1], args[2]));
+        String contents = readFile(args[1]);
+        String key = readFile(args[2]);
+        System.out.println(encode(contents, key));
     }
     else if (args[0].equals("decode")) {
-        System.out.println(decode(args[1], args[2]));
-    }
+        String contents = readFile(args[1]);
+        String key = readFile(args[2]);
+        System.out.println(decode(contents, key));    }
   }
 
-  public static String encode(String fileToEncode, String keyFile) {
-    String key = readFile(keyFile);
-    String contents = readFile(fileToEncode);
+  public static String encode(String contents, String key) {
     StringBuilder encodedMessage = new StringBuilder();
 
     Matrix k = generateKeyMatrix(key);
@@ -45,11 +46,8 @@ public class Hill {
     return encodedMessage.toString();
   }
 
-  public static String decode(String fileToEncode, String keyFile) {
+  public static String decode(String contents, String key) {
     StringBuilder decodedMessage = new StringBuilder();
-
-    String key = readFile(keyFile);
-    String contents = readFile(fileToEncode);
 
     Matrix k = generateKeyMatrix(key);
 
@@ -81,7 +79,6 @@ public class Hill {
     }
     
     for (int i = 0; i < contents.length(); i += k.r) {
-        // possible edge case deal with later
         String temp = contents.substring(i, i + k.r);
         double[][] phrase = new double[k.r][1];
         for (int rows = 0; rows < phrase.length; rows++) {
@@ -116,8 +113,10 @@ public class Hill {
         }
         k = new Matrix(mat);
 
-        // System.out.println(k.toString());
-
+        if (!k.isCoprimeWith(26)) {
+            System.out.println("Invalid Key since determinant is a factor of 26.");
+            System.exit(0);
+        }
     }
     else {
         System.out.println("Key is not sufficient to create an n by n matrix.");

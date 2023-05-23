@@ -61,40 +61,40 @@ public class Hill {
      * Multiply every element with the modular inverse of the determinant.
      * Then mod each value by 26.
      */
-    
+
+     // FIXED BTW
+
+    //  System.out.println("Orginal\n" + k);
      double det = k.getDeterminant();
      k = k.getInverse();
-    //  System.out.println(k);
-     k = k.scalarMult(det);
+    //  System.out.println("Inverse\n" + k);
+     k = k.scalarMult(Math.abs(det));
+    //  System.out.println("Inverse * Det\n" + k);
      int modular = getMultModInverse((int)det, 26);
-     k = k.matrixMod(26);
+    //  System.out.println("Value is " + modular);
      k = k.scalarMult((double)modular);
+    //  System.out.println("After mult by inverse mod\n" + k);
      k = k.matrixMod(26);
 
-    //  System.out.println(k);
+    //  System.out.println("Final:\n" + k);
 
 
     while (contents.length() % k.r != 0) {
         contents += "Z";
     }
-    decodedMessage.append("test");
 
     for (int i = 0; i < contents.length(); i += k.r) {
         String temp = contents.substring(i, i + k.r);
-        System.out.println(temp);
         double[][] phrase = new double[k.r][1];
         for (int rows = 0; rows < phrase.length; rows++) {
             char c = temp.charAt(rows);
             phrase[rows][0] = (double)(c-65);
         }
+
         Matrix part = new Matrix(phrase);
-
-        // System.out.println(part.toString());
-
         Matrix decodedPart = k.mult(part);
-        // System.out.println(k);
-        System.out.println(decodedPart);
         decodedPart = decodedPart.matrixMod(26);
+
 
         decodedMessage.append(decodedPart.getAlpha());
     } 

@@ -36,6 +36,8 @@
  - Found more information regarding finding a modular multiplicative inverse.
     - [Extended Euclidean Algorithm](https://www.extendedeuclideanalgorithm.com/xea.php)  
  - Working decrypt by applying the extended euclidean algorithm to find the appropriate matrix used for decrypting.
+ - Fixed decoding not working in certain cases because of sign issues. 
+    - [Dcode Matrix Inverse](https://www.dcode.fr/matrix-inverse)  
 
 ## Resources
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  

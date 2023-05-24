@@ -12,6 +12,13 @@
 - Added cofactor, GCD methods to the Matrix object for future decodes.
 - Found additional resources for conducting a [Known Plaintext Attack - WCSU](https://sites.wcsu.edu/mbxml/html/sample_hill_analysis_kpt.html).
 
+### 05/23/2023
+
+- Added numbers, punctuation, etc. (basically any non-letter character) functionality to encoding and decoding messages.
+- Added a bruteforcer for all 2x2 key matrices.
+  - Relatively optimized, checks if not coprime with 26 AND invertible.
+- General bugfixing.
+
 
 ## Jason Lin
 

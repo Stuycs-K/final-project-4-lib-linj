@@ -111,7 +111,7 @@ public class Hill {
 
     // pad with Z's
     while (contents.length() % k.r != 0) {
-        contents += "Z";
+        contents += "z";
     }
 
     for (int i = 0; i < contents.length(); i += k.r) {
@@ -119,16 +119,27 @@ public class Hill {
         double[][] phrase = new double[k.r][1];
         for (int rows = 0; rows < phrase.length; rows++) {
             char c = temp.charAt(rows);
-            phrase[rows][0] = (double)(c-65);
+            if (Character.isUpperCase(c)) {
+              phrase[rows][0] = (double)(c-65);
+            }
+            if (Character.isLowerCase(c)) {
+              phrase[rows][0] = (double)(c-97);
+            }
         }
+
         Matrix part = new Matrix(phrase);
-
-        // System.out.println(part.toString());
-
         Matrix encodedPart = k.mult(part);
         encodedPart = encodedPart.matrixMod(26);
-
-        encodedMessage.append(encodedPart.getAlpha());
+        String messagePart = matrixToText(encodedPart);
+        for (int w = 0; w < temp.length(); w++) {
+          if (Character.isLowerCase(temp.charAt(w))) {
+            encodedMessage.append(Character.toLowerCase(messagePart.charAt(w)));
+          }
+          if (Character.isUpperCase(temp.charAt(w))) {
+            encodedMessage.append(messagePart.charAt(w));
+          }
+        }
+        // encodedMessage.append(matrixToText(encodedPart));
     }
 
     for (int i = 0; i < skippedChars.size(); i++){
@@ -155,25 +166,15 @@ public class Hill {
      * Then mod each value by 26.
      */
 
-     // FIXED BTW
-
-    //  System.out.println("Orginal\n" + k);
      double det = k.getDeterminant();
      k = k.getInverse();
-    //  System.out.println("Inverse\n" + k);
      k = k.scalarMult(Math.abs(det));
-    //  System.out.println("Inverse * Det\n" + k);
      int modular = getMultModInverse((int)det, 26);
-    //  System.out.println("Value is " + modular);
      k = k.scalarMult((double)modular);
-    //  System.out.println("After mult by inverse mod\n" + k);
      k = k.matrixMod(26);
 
-    //  System.out.println("Final:\n" + k);
-
-
     while (contents.length() % k.r != 0) {
-        contents += "Z";
+        contents += "z";
     }
 
     for (int i = 0; i < contents.length(); i += k.r) {
@@ -181,15 +182,28 @@ public class Hill {
         double[][] phrase = new double[k.r][1];
         for (int rows = 0; rows < phrase.length; rows++) {
             char c = temp.charAt(rows);
-            phrase[rows][0] = (double)(c-65);
+            if (Character.isUpperCase(c)) {
+              phrase[rows][0] = (double)(c-65);
+            }
+            if (Character.isLowerCase(c)) {
+              phrase[rows][0] = (double)(c-97);
+            }
         }
 
         Matrix part = new Matrix(phrase);
         Matrix decodedPart = k.mult(part);
         decodedPart = decodedPart.matrixMod(26);
+        String messagePart = matrixToText(decodedPart);
+        for (int w = 0; w < temp.length(); w++) {
+          if (Character.isLowerCase(temp.charAt(w))) {
+            decodedMessage.append(Character.toLowerCase(messagePart.charAt(w)));
+          }
+          if (Character.isUpperCase(temp.charAt(w))) {
+            decodedMessage.append(messagePart.charAt(w));
+          }
+        }
+        // decodedMessage.append(matrixToText(decodedPart));
 
-
-        decodedMessage.append(decodedPart.getAlpha());
     }
 
     for (int i = 0; i < skippedChars.size(); i++){
@@ -215,8 +229,8 @@ public class Hill {
         }
         k = new Matrix(mat);
 
-        if (!k.isCoprimeWith(26)) {
-            System.out.println("Invalid Key since determinant is a factor of 26.");
+        if (!k.isCoprimeWith(26) || k.getDeterminant()==0) {
+            System.out.println("Invalid Key since determinant is a factor of 26 or determinant is 0.");
             System.exit(0);
         }
     }
@@ -266,7 +280,7 @@ public class Hill {
       catch (FileNotFoundException ex) {
           ex.printStackTrace();
       }
-      fileContent = fileContent.toUpperCase();
+      // fileContent = fileContent.toUpperCase();
       return fileContent;
   }
 }

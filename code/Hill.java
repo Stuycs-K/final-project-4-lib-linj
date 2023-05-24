@@ -108,7 +108,7 @@ public class Hill {
     StringBuilder encodedMessage = new StringBuilder();
 
     Matrix k = generateKeyMatrix(key);
-    System.out.println(k);
+    // System.out.println(k);
 
     // pad with Z's
     while (contents.length() % k.r != 0) {

@@ -108,6 +108,7 @@ public class Hill {
     StringBuilder encodedMessage = new StringBuilder();
 
     Matrix k = generateKeyMatrix(key);
+    System.out.println(k);
 
     // pad with Z's
     while (contents.length() % k.r != 0) {
@@ -168,8 +169,11 @@ public class Hill {
 
      double det = k.getDeterminant();
      k = k.getInverse();
+    //  System.out.println("Inverse\n" + k);
      k = k.scalarMult(Math.abs(det));
+    //  System.out.println("Scalar Mult\n" + k);
      int modular = getMultModInverse((int)det, 26);
+    //  System.out.println("Modular: " + modular);
      k = k.scalarMult((double)modular);
      k = k.matrixMod(26);
 
@@ -230,7 +234,7 @@ public class Hill {
         k = new Matrix(mat);
 
         if (!k.isCoprimeWith(26) || k.getDeterminant()==0) {
-            System.out.println("Invalid Key since determinant is a factor of 26 or determinant is 0.");
+            System.out.println("Invalid Key since determinant is a factor of 26 or determinant is 0.\n" + "Determinant: " + k.getDeterminant());
             System.exit(0);
         }
     }

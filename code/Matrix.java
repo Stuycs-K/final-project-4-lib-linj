@@ -196,7 +196,7 @@ public class Matrix{
     double[][] scaled = new double[r][c];
     for (int i = 0; i < r; i++){
       for (int j = 0; j < c; j++){
-        scaled[i][j] = m[i][j] * scalar;
+        scaled[i][j] = Math.round(m[i][j] * scalar);
       }
     }
     return new Matrix(scaled);
@@ -242,15 +242,15 @@ public class Matrix{
     return accumulatedGCD;
   }
 
-  public String getAlpha() {
-    String str = "";
-    for (int i = 0; i < r; i++) {
-      for (int j = 0; j < c; j++) {
-        str += (char)(int)((m[i][j] + 65));
-      }
-    }
-    return str;
-  }
+  // public String getAlpha() {
+  //   String str = "";
+  //   for (int i = 0; i < r; i++) {
+  //     for (int j = 0; j < c; j++) {
+  //       str += (char)(int)((m[i][j] + 65));
+  //     }
+  //   }
+  //   return str;
+  // }
 
   // testing
   public static void main(String[] args) {

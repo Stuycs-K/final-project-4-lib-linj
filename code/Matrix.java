@@ -239,7 +239,7 @@ public class Matrix{
       }
       counter++;
     }
-    return accumulatedGCD;  
+    return accumulatedGCD;
   }
 
   public String getAlpha() {

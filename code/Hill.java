@@ -4,20 +4,107 @@ import java.util.*;
 public class Hill {
   public static void main(String[] args) {
     if (args.length == 0) {
-        System.out.println(getMultModInverse(9, 26));
+      System.out.println(getMultModInverse(9, 26));
     }
     else if (args[0].equals("encode")) {
-        String contents = readFile(args[1]);
-        String key = readFile(args[2]);
-        System.out.println(encode(contents, key));
+      String contents = readFile(args[1]);
+      String key = readFile(args[2]);
+      ArrayList<Character> skippedChars = getSkippedChars(args[1]);
+      ArrayList<Integer> skippedIndices = getSkippedIndices(args[1]);
+      System.out.println(encode(contents, key, skippedChars, skippedIndices));
     }
     else if (args[0].equals("decode")) {
-        String contents = readFile(args[1]);
-        String key = readFile(args[2]);
-        System.out.println(decode(contents, key));    }
+      String contents = readFile(args[1]);
+      String key = readFile(args[2]);
+      ArrayList<Character> skippedChars = getSkippedChars(args[1]);
+      ArrayList<Integer> skippedIndices = getSkippedIndices(args[1]);
+      System.out.println(decode(contents, key, skippedChars, skippedIndices));
+    }
+    else if (args[0].equals("bruteforce")) {
+      bruteforce(args[1]);
+    }
   }
 
-  public static String encode(String contents, String key) {
+  public static void bruteforce(String filepath){
+    String contents = readFile(filepath);
+    ArrayList<Character> skippedChars = getSkippedChars(filepath);
+    ArrayList<Integer> skippedIndices = getSkippedIndices(filepath);
+
+    // iterate thru all possible keys (given coprime w/ 26)
+    for (int i = 0; i < 26; i++){
+      for (int j = 0; j < 26; j++){
+        for (int k = 0; k < 26; k++){
+          for (int l = 0; l < 26; l++){
+            double[][] keyMatrix = {{i, j}, {k, l}};
+            Matrix tempKey = new Matrix(keyMatrix);
+
+            // optimization: key determinant must be coprime with 26
+            if (tempKey.isCoprimeWith(26) && tempKey.getDeterminant() != 0){
+              String key = matrixToText(tempKey);
+              String decrypted = decode(contents, key, skippedChars, skippedIndices);
+              System.out.println("Key: " + key);
+              System.out.println("Decrypted: " + decrypted);
+            }
+          }
+        }
+      }
+    }
+    System.out.println();
+  }
+
+  public static String matrixToText(Matrix matrix){
+    StringBuilder key = new StringBuilder();
+    for (int i = 0; i < matrix.r; i++){
+      for (int j = 0; j < matrix.c; j++){
+        key.append((char)(matrix.m[i][j] + 65));
+      }
+    }
+    return key.toString();
+  }
+
+  public static ArrayList<Character> getSkippedChars(String file){
+    ArrayList<Character> skippedChars = new ArrayList<Character>();
+    try {
+        File f = new File(file);
+        Scanner in = new Scanner(f);
+        while (in.hasNextLine()) {
+            String text = in.nextLine();
+            for (int i = 0; i < text.length(); i++) {
+                if (!Character.isLetter(text.charAt(i))) {
+                    skippedChars.add(text.charAt(i));
+                }
+            }
+        }
+    }
+    catch (FileNotFoundException ex) {
+        ex.printStackTrace();
+    }
+    return skippedChars;
+  }
+
+  public static ArrayList<Integer> getSkippedIndices(String file){
+    ArrayList<Integer> skippedIndices = new ArrayList<Integer>();
+    int charCount = 0;
+    try {
+        File f = new File(file);
+        Scanner in = new Scanner(f);
+        while (in.hasNextLine()) {
+            String text = in.nextLine();
+            for (int i = 0; i < text.length(); i++) {
+                if (!Character.isLetter(text.charAt(i))) {
+                    skippedIndices.add(charCount);
+                }
+                charCount++;
+            }
+        }
+    }
+    catch (FileNotFoundException ex) {
+        ex.printStackTrace();
+    }
+    return skippedIndices;
+  }
+
+  public static String encode(String contents, String key, ArrayList<Character> skippedChars, ArrayList<Integer> skippedIndices) {
     StringBuilder encodedMessage = new StringBuilder();
 
     Matrix k = generateKeyMatrix(key);
@@ -26,7 +113,7 @@ public class Hill {
     while (contents.length() % k.r != 0) {
         contents += "Z";
     }
-    
+
     for (int i = 0; i < contents.length(); i += k.r) {
         String temp = contents.substring(i, i + k.r);
         double[][] phrase = new double[k.r][1];
@@ -42,11 +129,17 @@ public class Hill {
         encodedPart = encodedPart.matrixMod(26);
 
         encodedMessage.append(encodedPart.getAlpha());
-    } 
+    }
+
+    for (int i = 0; i < skippedChars.size(); i++){
+      int index = skippedIndices.get(i);
+      char c = skippedChars.get(i);
+      encodedMessage.insert(index, c);
+    }
     return encodedMessage.toString();
   }
 
-  public static String decode(String contents, String key) {
+  public static String decode(String contents, String key, ArrayList<Character> skippedChars, ArrayList<Integer> skippedIndices) {
     StringBuilder decodedMessage = new StringBuilder();
 
     Matrix k = generateKeyMatrix(key);
@@ -97,8 +190,13 @@ public class Hill {
 
 
         decodedMessage.append(decodedPart.getAlpha());
-    } 
+    }
 
+    for (int i = 0; i < skippedChars.size(); i++){
+      int index = skippedIndices.get(i);
+      char c = skippedChars.get(i);
+      decodedMessage.insert(index, c);
+    }
     return decodedMessage.toString();
   }
 
@@ -127,7 +225,7 @@ public class Hill {
         System.exit(0);
     }
     return k;
-  }  
+  }
 
   // getMultModInverse(determinant, 26)
   public static int getMultModInverse(int a, int b) {

@@ -224,6 +224,8 @@ public class Matrix{
 
   // old algo from apcs
   public static int gcd(int n1, int n2){
+    n1 = Math.abs(n1);
+    n2 = Math.abs(n2);
     int smaller;
     int counter = 1;
     int accumulatedGCD = 1;

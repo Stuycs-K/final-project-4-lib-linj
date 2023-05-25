@@ -21,7 +21,7 @@ public class Hill {
       System.out.println(decode(contents, key, skippedChars, skippedIndices));
     }
     else if (args[0].equals("bruteforce")) {
-      bruteforce(args[1]);
+      bruteforce(args[1], args[2]);
     }
     else if (args[0].equals("known-plaintext")) {
       String cribPlain = readFile(args[1]);
@@ -83,10 +83,14 @@ public class Hill {
     return new Matrix(matrix);
   }
 
-  public static void bruteforce(String filepath){
+  public static void bruteforce(String filepath, String wordlist){
     String contents = readFile(filepath);
+    ArrayList<String> wordsToCheck = readWordList(wordlist);
     ArrayList<Character> skippedChars = getSkippedChars(filepath);
     ArrayList<Integer> skippedIndices = getSkippedIndices(filepath);
+    int maxScore = 0;
+    String bestKey = "";
+    int score = 0;
 
     // iterate thru all possible keys (given coprime w/ 26)
     for (int i = 0; i < 26; i++){
@@ -100,13 +104,27 @@ public class Hill {
             if (tempKey.isCoprimeWith(26) && tempKey.getDeterminant() != 0){
               String key = matrixToText(tempKey);
               String decrypted = decode(contents, key, skippedChars, skippedIndices);
-              System.out.println("Key: " + key);
-              System.out.println("Decrypted: " + decrypted);
+              String temp = decrypted.toLowerCase();
+              for (int words = 0; words < wordsToCheck.size(); words++) {
+                if (temp.contains(wordsToCheck.get(words))) {
+                  score += Math.pow(wordsToCheck.get(words).length(),2);
+                  // System.out.println(wordsToCheck.get(words));
+                  // System.out.println("Key: " + key);
+                  // System.out.println("Decrypted: " + decrypted);
+                }
+              }
+              if (score > maxScore) {
+                maxScore = score;
+                bestKey = key;
+              }
+              score = 0;
             }
           }
         }
       }
     }
+    System.out.println("Key: " + bestKey);
+    System.out.println("Decrypted: " + decode(contents, bestKey, skippedChars, skippedIndices));
     System.out.println();
   }
 
@@ -346,5 +364,23 @@ public class Hill {
       }
       // fileContent = fileContent.toUpperCase();
       return fileContent;
+  }
+
+  public static ArrayList<String> readWordList(String file) {
+    ArrayList<String> contents = new ArrayList<String>();
+    try {
+      File f = new File(file);
+      Scanner in = new Scanner(f);
+      while (in.hasNext()) {
+        String text = in.nextLine();
+        if (text.length() >= 2) {
+          contents.add(text);
+        }
+      }
+    }
+    catch (FileNotFoundException ex) {
+      ex.printStackTrace();
+    }
+    return contents;
   }
 }

@@ -19,6 +19,10 @@
   - Relatively optimized, checks if not coprime with 26 AND invertible.
 - General bugfixing.
 
+### 05/24/2023
+
+- Started working on known-plaintext attack method of decryption. 
+  - Utilizes matrix inversion methodology.
 
 ## Jason Lin
 

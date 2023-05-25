@@ -49,6 +49,7 @@ public class Hill {
     Matrix R = toMatrix(cribPlain, keySize);
     System.out.println("R");
     System.out.println(R);
+    
     Matrix S = toMatrix(cribCipher, keySize);
     System.out.println("S");
     System.out.println(S);

@@ -46,21 +46,24 @@ public class Hill {
       return;
     }
 
-    Matrix R = toMatrix(cribPlain, keySize);
-    System.out.println("R");
-    System.out.println(R);
-    
-    Matrix S = toMatrix(cribCipher, keySize);
-    System.out.println("S");
-    System.out.println(S);
+    Matrix P = toMatrix(cribPlain, keySize);
+    System.out.println("P " + cribPlain);
+    System.out.println(P);
 
-    // get R^(-1)
-    Matrix inverseR = R.getInverse();
-    System.out.println("inverseR");
-    System.out.println(inverseR);
+    Matrix C = toMatrix(cribCipher, keySize);
+    System.out.println("C " + cribCipher);
+    System.out.println(C);
 
-    // K = R^(-1) * S
-    Matrix keyMatrix = inverseR.mult(S).scalarMult(26).matrixMod(26);
+    // get P^(-1)
+    Matrix inverseP = P.getInverse().scalarMult(P.getDeterminant()).matrixMod(26);
+    System.out.println("inverseP");
+    System.out.println(inverseP);
+
+    // System.out.println(inverseP.mult(P));
+
+    // K = C * P^(-1)
+    Matrix keyMatrix = C.mult(inverseP);
+    keyMatrix = keyMatrix.matrixMod(26);
     System.out.println("keyMatrix");
     System.out.println(keyMatrix);
     String key = matrixToText(keyMatrix);
@@ -75,7 +78,7 @@ public class Hill {
     int n = 0;
     for (int i = 0; i < keySize; i++){
       for (int j = 0; j < keySize; j++){
-        matrix[i][j] = (int)(msg.charAt(n) - 65);
+        matrix[j][i] = (int)(msg.charAt(n) - 65);
         n++;
       }
     }

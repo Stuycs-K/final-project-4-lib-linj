@@ -225,9 +225,11 @@ public class Hill {
      */
 
      double det = k.getDeterminant();
+    //  System.out.println("Original\n" + k);
      k = k.getInverse();
     //  System.out.println("Inverse\n" + k);
      k = k.scalarMult(Math.abs(det));
+    //  System.out.println("Determinant: " + det);
     //  System.out.println("Scalar Mult\n" + k);
      int modular = getMultModInverse((int)det, 26);
     //  System.out.println("Modular: " + modular);

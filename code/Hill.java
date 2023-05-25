@@ -23,6 +23,63 @@ public class Hill {
     else if (args[0].equals("bruteforce")) {
       bruteforce(args[1]);
     }
+    else if (args[0].equals("known-plaintext")) {
+      String cribPlain = readFile(args[1]);
+      String cribCipher = readFile(args[2]);
+      String filepath = args[3];
+      int keySize = Integer.parseInt(args[4]);
+      // if the output doesn't make sense, it means the keysize is likely wrong. guess again!
+
+      // ArrayList<Character> skippedChars = getSkippedChars(args[3]);
+      // ArrayList<Integer> skippedIndices = getSkippedIndices(args[3]);
+      knownPlaintextAttack(cribPlain, cribCipher, filepath, keySize);
+    }
+  }
+
+  public static void knownPlaintextAttack(String cribPlain, String cribCipher, String filepath, int keySize){
+    String contents = readFile(filepath);
+    ArrayList<Character> skippedChars = getSkippedChars(filepath);
+    ArrayList<Integer> skippedIndices = getSkippedIndices(filepath);
+
+    if (cribPlain.length() != cribCipher.length()){
+      System.err.println("Your crib has different character lengths for its corresponding ciphertext and plaintext.");
+      return;
+    }
+
+    Matrix R = toMatrix(cribPlain, keySize);
+    System.out.println("R");
+    System.out.println(R);
+    Matrix S = toMatrix(cribCipher, keySize);
+    System.out.println("S");
+    System.out.println(S);
+
+    // get R^(-1)
+    Matrix inverseR = R.getInverse();
+    System.out.println("inverseR");
+    System.out.println(inverseR);
+
+    // K = R^(-1) * S
+    Matrix keyMatrix = inverseR.mult(S).scalarMult(26).matrixMod(26);
+    System.out.println("keyMatrix");
+    System.out.println(keyMatrix);
+    String key = matrixToText(keyMatrix);
+    System.out.println("key: " + key);
+
+    // decode ciphertext with newly obtained key matrix
+    System.out.println(decode(contents, key, skippedChars, skippedIndices));
+  }
+
+  public static Matrix toMatrix(String msg, int keySize){
+    double[][] matrix = new double[keySize][keySize];
+    int n = 0;
+    for (int i = 0; i < keySize; i++){
+      for (int j = 0; j < keySize; j++){
+        matrix[i][j] = (int)(msg.charAt(n) - 65);
+        n++;
+      }
+    }
+
+    return new Matrix(matrix);
   }
 
   public static void bruteforce(String filepath){

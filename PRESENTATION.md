@@ -52,8 +52,7 @@ $$
 \begin{pmatrix}
     m_{11}\\
     m_{21}
-\end{pmatrix}
-=
+\end{pmatrix}=
 \begin{pmatrix}
     k_{11}*m_{11} + k_{12}*m_{21} \\
     k_{21}*m_{11} + k_{22}*m_{21}

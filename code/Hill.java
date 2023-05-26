@@ -69,8 +69,8 @@ public class Hill {
     Matrix keyMatrix = inverseP.mult(C);
     keyMatrix = keyMatrix.matrixMod(26);
     System.out.println("keyMatrix");
-    System.out.println(keyMatrix);
     keyMatrix = new Matrix(Matrix.transpose(keyMatrix.m));
+    System.out.println(keyMatrix);
     String key = matrixToText(keyMatrix);
     System.out.println("key: " + key);
 

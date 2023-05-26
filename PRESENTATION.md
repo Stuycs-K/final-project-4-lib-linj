@@ -15,11 +15,11 @@ $$
     {Y}\\
 \end{pmatrix}
 \rightarrow
- \begin{pmatrix}
+\begin{pmatrix}
      {7} \\ 
      {4} \\
      {24}
- \end{pmatrix}
+\end{pmatrix}
 $$
 
 
@@ -27,15 +27,15 @@ $$
 
 
 $$
- \begin{pmatrix}
+\begin{pmatrix}
     {B} & {R} \\
     {U} & {H} \\
- \end{pmatrix}
- \rightarrow
- \begin{pmatrix}
+\end{pmatrix}
+\rightarrow
+\begin{pmatrix}
      {1} & {17} \\ 
      {20} & {7}
- \end{pmatrix}
+\end{pmatrix}
 $$
 
 
@@ -45,12 +45,12 @@ To encrypt a message, the message is seperated into blocks of *n* characters and
 
 
 $$
- \begin{pmatrix}
+\begin{pmatrix}
      k_{11} & k_{12}\\ 
      k_{21} & k_{22}
- \end{pmatrix}
- \times
- \begin{pmatrix}
+\end{pmatrix}
+\times
+\begin{pmatrix}
     m_{11}\\
     m_{21}
 \end{pmatrix}

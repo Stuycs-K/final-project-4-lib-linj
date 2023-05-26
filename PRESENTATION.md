@@ -45,7 +45,7 @@ $$
 \end{pmatrix}
  $$
 
- - Using the key "BRUH" and the message "CATS"
+ - Using the key "BRUH" and the message "CATS" the message is encrypted as CONM
 
  $$
  \begin{pmatrix}
@@ -122,4 +122,4 @@ $$
 \end{pmatrix}
  $$
 
-
+ ### Decryption

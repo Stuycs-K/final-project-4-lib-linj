@@ -29,6 +29,9 @@
 - Continued working on known-plaintext attack method. 
 - Developed method to retrieve a modular inverse matrix of an existing matrix
 
+### 05/26/2023
+ - Fixed known-plaintext attack.
+
 ## Jason Lin
 
 ### 05/18/2023
@@ -62,6 +65,9 @@
 ### 05/25/2023
  - Made bruteforce return best possibility only through wordlist.
  - General debugging.
+
+### 05/26/2023
+ - Started working on PRESENTATION.md
 
 ## Resources
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  

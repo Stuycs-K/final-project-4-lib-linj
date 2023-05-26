@@ -54,6 +54,10 @@
  - Made decode and encode case insensitive.
  - Tested on larger text and up to 5by5 matrix. Fixed bugs that resulted such as off by one due to multiplying doubles.
 
+### 05/25/2023
+ - Made bruteforce return best possibility only through wordlist.
+ - General debugging.
+
 ## Resources
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  
 [Known Plaintext Attack - NKU](https://www.nku.edu/~christensen/092mat483%20known%20plaintext%20attack%20of%20Hill%20cipher.pdf)  

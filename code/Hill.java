@@ -66,7 +66,6 @@ public class Hill {
 
     // P * K = C (mod 26)
     // K = P^(-1) * C (mod 26)
-    // Matrix keyMatrix = C.mult(inverseP);
     Matrix keyMatrix = inverseP.mult(C);
     keyMatrix = keyMatrix.matrixMod(26);
     System.out.println("keyMatrix");

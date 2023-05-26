@@ -41,7 +41,6 @@ $$
 
 ### Encryption
 To encrypt a message, the message is seperated into blocks of *n* characters and multiplied by an invertible *n* by *n* matrix against modulus 26. In this case, an invertible matrix against modulus 26 is one such that the greatest common denominator between the determinant of the matrix and 26 is 1. In other words, the determinant and 26 are coprime and share no other common factors other than 1. In the case of modulus 26, the determinant must not be a multiple of 2 or 13.
-
  - The key matrix is denoted by *k* and the message *m* and the product of the two is the resulting encrypted matrix.
 
 
@@ -61,8 +60,6 @@ $$
     k_{21}*m_{11} + k_{22}*m_{21}
 \end{pmatrix}
  $$
-
-
  - Using the key "BRUH" and the message "CATS" the message is encrypted as CONM
 
 

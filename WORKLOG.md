@@ -24,6 +24,11 @@
 - Started working on known-plaintext attack method of decryption. 
   - Utilizes matrix inversion methodology.
 
+### 05/25/2023
+
+- Continued working on known-plaintext attack method. 
+- Developed method to retrieve a modular inverse matrix of an existing matrix
+
 ## Jason Lin
 
 ### 05/18/2023

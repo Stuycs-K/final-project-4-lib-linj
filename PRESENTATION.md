@@ -47,22 +47,36 @@ $$
 
  - Using the key "BRUH" and the message "CATS" the message is encrypted as CONM
 
- $$
+$$
+ \mathit{CATS}
+ \rightarrow
  \begin{pmatrix}
-    {B} & {R} \\
-    {U} & {H} \\
- \end{pmatrix}
- \times
- \begin{pmatrix}
-    {C} \\
+    {C}\\
     {A}
  \end{pmatrix}
- =
+ \mathit{,}
+ \begin{pmatrix}
+    {T}\\
+    {S}
+ \end{pmatrix}
+ \rightarrow
+ \begin{pmatrix}
+    {2}\\
+    {0}
+ \end{pmatrix}
+ \mathit{,}
+ \begin{pmatrix}
+    {19}\\
+    {18}
+ \end{pmatrix}
+$$
+
+$$
  \begin{pmatrix}
      {1} & {17}\\ 
      {20} & {7}
  \end{pmatrix}
- \times
+\times
  \begin{pmatrix}
     {2}\\
     {0}
@@ -72,30 +86,21 @@ $$
     {2} \\
     {40}
 \end{pmatrix}
-\ mod\ 26 =
+\equiv
 \begin{pmatrix}
     {2} \\
     {14}
 \end{pmatrix}
-= 
+\bmod{26} \rightarrow
 \begin{pmatrix}
     {C} \\
     {O}
 \end{pmatrix}
- $$
+$$
 
 
- $$
- \begin{pmatrix}
-    {B} & {R} \\
-    {U} & {H} \\
- \end{pmatrix}
- \times
- \begin{pmatrix}
-    {T} \\
-    {S}
- \end{pmatrix}
- =
+$$
+
  \begin{pmatrix}
      {1} & {17}\\ 
      {20} & {7}
@@ -110,16 +115,17 @@ $$
     {325} \\
     {506}
 \end{pmatrix}
-\ mod\ 26 =
+\equiv
 \begin{pmatrix}
     {13} \\
     {12}
 \end{pmatrix}
-= 
+\bmod{26}
+\rightarrow
 \begin{pmatrix}
     {N} \\
     {M}
 \end{pmatrix}
- $$
+$$
 
  ### Decryption

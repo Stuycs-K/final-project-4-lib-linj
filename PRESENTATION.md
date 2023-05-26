@@ -7,6 +7,12 @@ Each letter is represented as a value modulo 26 and placed into a matrix.
 - In other words, an A would correspond to the value 0, B to 1, ..., Z to 25.
 - A message of HEY would be represented as the matrix 
 $$
+\begin{pmatrix}
+    {H}\\
+    {E}\\
+    {Y}\\
+\end{pmatrix}
+\rightarrow
  \begin{pmatrix}
      {7} \\ 
      {4} \\
@@ -16,7 +22,12 @@ $$
 
 
  - The key BRUH would be represented as the matrix
- $$
+$$
+ \begin{pmatrix}
+    {B} & {R} \\
+    {U} & {H} \\
+ \end{pmatrix}
+ \rightarrow
  \begin{pmatrix}
      {1} & {17} \\ 
      {20} & {7}

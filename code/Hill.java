@@ -55,17 +55,23 @@ public class Hill {
     System.out.println(C);
 
     // get P^(-1)
-    Matrix inverseP = P.getInverse().scalarMult(P.getDeterminant()).matrixMod(26);
+    // Matrix inverseP = P.getInverse().scalarMult(P.getDeterminant()).matrixMod(26);
+    Matrix inverseP = P.getModularInverseMatrix(26).matrixMod(26);
+    // Matrix inverseP = P.getInverse().scalarMult(getMultModInverse((int)P.getDeterminant(), 26));
     System.out.println("inverseP");
     System.out.println(inverseP);
 
     // System.out.println(inverseP.mult(P));
-
     // K = C * P^(-1)
-    Matrix keyMatrix = C.mult(inverseP);
+
+    // P * K = C (mod 26)
+    // K = P^(-1) * C (mod 26)
+    // Matrix keyMatrix = C.mult(inverseP);
+    Matrix keyMatrix = inverseP.mult(C);
     keyMatrix = keyMatrix.matrixMod(26);
     System.out.println("keyMatrix");
     System.out.println(keyMatrix);
+    keyMatrix = new Matrix(Matrix.transpose(keyMatrix.m));
     String key = matrixToText(keyMatrix);
     System.out.println("key: " + key);
 
@@ -78,7 +84,7 @@ public class Hill {
     int n = 0;
     for (int i = 0; i < keySize; i++){
       for (int j = 0; j < keySize; j++){
-        matrix[j][i] = (int)(msg.charAt(n) - 65);
+        matrix[i][j] = (int)(msg.charAt(n) - 65);
         n++;
       }
     }

@@ -141,6 +141,44 @@ public class Matrix{
     return scalarMult(adjugate, 1/getDeterminant());
   }
 
+  public Matrix getModularInverseMatrix(int modVal){
+    int determinant = ((int)getDeterminant() % modVal + modVal) % modVal;
+    int determinantInv = modInverse(determinant, modVal);
+    if (determinantInv == -1){
+      System.out.println("mod inverse doesn't exist for matrix");
+      System.exit(0);
+    }
+
+    double[][] minorMatrix = new double[r][c];
+    for (int i = 0; i < r; i++){
+      for (int j = 0; j < c; j++){
+        minorMatrix[i][j] = getMinor(m, i ,j);
+      }
+    }
+    double[][] cofactors = getCofactorMatrix(minorMatrix);
+    double[][] adjugate = transpose(cofactors);
+
+    double[][] inverseMatrix = new double[m.length][m.length];
+    for (int i = 0; i < m.length; i++){
+      for (int j = 0; j < m.length; j++){
+        inverseMatrix[i][j] = (adjugate[i][j] * determinantInv) % modVal;
+      }
+    }
+
+    return new Matrix(inverseMatrix);
+  }
+
+  public static int modInverse(int n, int modVal){
+    n = n % modVal;
+    for (int i = 1; i < modVal; i++){
+      if ((n * i) % modVal == 1){
+        return i;
+      }
+    }
+    System.out.println("modular inverse of val " + n + " doesn't exist");
+    return -1;
+  }
+
   // modified version of getSub()
   public double getMinor(double[][] matrix, int excludedRow, int excludedCol){
     double[][] sub = new double[matrix.length - 1][matrix[0].length - 1];
@@ -171,7 +209,7 @@ public class Matrix{
     return cofactors;
   }
 
-  public double[][] transpose(double[][] matrix){
+  public static double[][] transpose(double[][] matrix){
     // swaps elements about main diagonal
     double[][] transposed = new double[matrix.length][matrix[0].length];
     for (int i = 0; i < matrix.length; i++){
@@ -219,11 +257,13 @@ public class Matrix{
   // check if matrix's determinant is coprime with a val
   public boolean isCoprimeWith(int val){
     int determinant = (int)getDeterminant();
-    return (gcd(Math.abs(determinant), val) == 1);
+    return (gcd(determinant, val) == 1);
   }
 
   // old algo from apcs
   public static int gcd(int n1, int n2){
+    n1 = Math.abs(n1);
+    n2 = Math.abs(n2);
     int smaller;
     int counter = 1;
     int accumulatedGCD = 1;

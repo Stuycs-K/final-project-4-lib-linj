@@ -49,6 +49,7 @@ $$
      k_{11} & k_{12}\\ 
      k_{21} & k_{22}
 \end{pmatrix}
+\times
 \begin{pmatrix}
     m_{11}\\
     m_{21}
@@ -93,12 +94,11 @@ $$
      {1} & {17}\\ 
      {20} & {7}
  \end{pmatrix}
-\times
+ \times
  \begin{pmatrix}
     {2}\\
     {0}
-\end{pmatrix}
-= 
+\end{pmatrix}= 
 \begin{pmatrix}
     {2} \\
     {40}
@@ -108,7 +108,7 @@ $$
     {2} \\
     {14}
 \end{pmatrix}
-\bmod{26} \rightarrow
+\bmod{26}\rightarrow
 \begin{pmatrix}
     {C} \\
     {O}
@@ -125,8 +125,7 @@ $$
  \begin{pmatrix}
     {19}\\
     {18}
-\end{pmatrix}
-= 
+\end{pmatrix}= 
 \begin{pmatrix}
     {325} \\
     {506}

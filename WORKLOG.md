@@ -70,7 +70,7 @@
  - Started working on PRESENTATION.md
 
 ### 05/27/2023
- - Made bruteforce return top 5 possibilities.
+ - Made bruteforce return any number of top possibilities.
 
 ## Resources
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  

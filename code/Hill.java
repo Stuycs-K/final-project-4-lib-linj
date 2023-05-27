@@ -21,7 +21,7 @@ public class Hill {
       System.out.println(decode(contents, key, skippedChars, skippedIndices));
     }
     else if (args[0].equals("bruteforce")) {
-      bruteforce(args[1], args[2]);
+      bruteforce(args[1], args[2], Integer.parseInt(args[3]));
     }
     else if (args[0].equals("known-plaintext")) {
       String cribPlain = readFile(args[1]);
@@ -91,7 +91,7 @@ public class Hill {
     return new Matrix(matrix);
   }
 
-  public static void bruteforce(String filepath, String wordlist){
+  public static void bruteforce(String filepath, String wordlist, int amount){
     String contents = readFile(filepath);
     ArrayList<String> wordsToCheck = readWordList(wordlist);
     ArrayList<Character> skippedChars = getSkippedChars(filepath);
@@ -135,8 +135,9 @@ public class Hill {
     // System.out.println("Key: " + bestKey);
     // System.out.println("Decrypted: " + decode(contents, bestKey, skippedChars, skippedIndices));
     // System.out.println();
+
     System.out.println("Best Matches");
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < amount; i++) {
       System.out.println("Key: " + matrixToText(matrixList.get(i)));
       System.out.println("Decrypted: " + decode(contents, matrixToText(matrixList.get(i)), skippedChars, skippedIndices));
     }

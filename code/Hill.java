@@ -113,14 +113,7 @@ public class Hill {
               String key = matrixToText(tempKey);
               String decrypted = decode(contents, key, skippedChars, skippedIndices);
               String temp = decrypted.toLowerCase();
-              for (int words = 0; words < wordsToCheck.size(); words++) {
-                if (temp.contains(wordsToCheck.get(words))) {
-                  score += Math.pow(wordsToCheck.get(words).length(),2);
-                  // System.out.println(wordsToCheck.get(words));
-                  // System.out.println("Key: " + key);
-                  // System.out.println("Decrypted: " + decrypted);
-                }
-              }
+              score = getScore(temp, wordsToCheck);
               if (score > maxScore) {
                 maxScore = score;
                 bestKey = key;
@@ -135,6 +128,18 @@ public class Hill {
     System.out.println("Decrypted: " + decode(contents, bestKey, skippedChars, skippedIndices));
     System.out.println();
   }
+
+  public static int getScore(String plaintext, ArrayList<String> wordlist) {
+    int score = 0;
+    for (int words = 0; words < wordlist.size(); words++) {
+      if (plaintext.contains(wordlist.get(words))) {
+        score += Math.pow(wordlist.get(words).length(), 2);
+      }
+    }
+    return score;
+  }
+
+
 
   public static String matrixToText(Matrix matrix){
     StringBuilder key = new StringBuilder();

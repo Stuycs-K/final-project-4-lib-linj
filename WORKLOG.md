@@ -69,6 +69,9 @@
 ### 05/26/2023
  - Started working on PRESENTATION.md
 
+### 05/27/2023
+ - Made bruteforce return top 5 possibilities.
+
 ## Resources
 [Hill Cipher Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)  
 [Known Plaintext Attack - NKU](https://www.nku.edu/~christensen/092mat483%20known%20plaintext%20attack%20of%20Hill%20cipher.pdf)  

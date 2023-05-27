@@ -96,9 +96,9 @@ public class Hill {
     ArrayList<String> wordsToCheck = readWordList(wordlist);
     ArrayList<Character> skippedChars = getSkippedChars(filepath);
     ArrayList<Integer> skippedIndices = getSkippedIndices(filepath);
-    int maxScore = 0;
-    String bestKey = "";
-    int score = 0;
+    // int maxScore = 0;
+    // String bestKey = "";
+    // int score = 0;
     ArrayList<Matrix> matrixList= new ArrayList<Matrix>();
 
     // iterate thru all possible keys (given coprime w/ 26)
@@ -108,34 +108,42 @@ public class Hill {
           for (int l = 0; l < 26; l++){
             double[][] keyMatrix = {{i, j}, {k, l}};
             Matrix tempKey = new Matrix(keyMatrix);
-            matrixList.add(tempKey);
+            if (tempKey.isCoprimeWith(26) && tempKey.getDeterminant() != 0){
+              matrixList.add(tempKey);
+            }
           }
         }
       }
     }
 
-    for (int keys = 0; keys < matrixList.size(); keys++) {
-      // optimization: key determinant must be coprime with 26
-      Matrix tempKey = matrixList.get(keys);
-      if (tempKey.isCoprimeWith(26) && tempKey.getDeterminant() != 0){
-        String key = matrixToText(tempKey);
-        String decrypted = decode(contents, key, skippedChars, skippedIndices);
-        String temp = decrypted.toLowerCase();
-        score = getScore(temp, wordsToCheck);
-        if (score > maxScore) {
-          maxScore = score;
-          bestKey = key;
-        }
-        score = 0;
-      }
-    }
+    Collections.sort(matrixList, Comparator.comparingInt((Matrix matrix) -> getScore(decode(contents, matrixToText(matrix), skippedChars, skippedIndices), wordsToCheck)).reversed());
 
-    System.out.println("Key: " + bestKey);
-    System.out.println("Decrypted: " + decode(contents, bestKey, skippedChars, skippedIndices));
-    System.out.println();
+    // for (int keys = 0; keys < matrixList.size(); keys++) {
+    //   // optimization: key determinant must be coprime with 26
+    //   Matrix tempKey = matrixList.get(keys);
+    //   String key = matrixToText(tempKey);
+    //   String decrypted = decode(contents, key, skippedChars, skippedIndices);
+    //   String temp = decrypted.toLowerCase();
+    //   score = getScore(temp, wordsToCheck);
+    //   if (score > maxScore) {
+    //     maxScore = score;
+    //     bestKey = key;
+    //   }
+    //   score = 0;
+    // }
+
+    // System.out.println("Key: " + bestKey);
+    // System.out.println("Decrypted: " + decode(contents, bestKey, skippedChars, skippedIndices));
+    // System.out.println();
+    System.out.println("Best Matches");
+    for (int i = 0; i < 5; i++) {
+      System.out.println("Key: " + matrixToText(matrixList.get(i)));
+      System.out.println("Decrypted: " + decode(contents, matrixToText(matrixList.get(i)), skippedChars, skippedIndices));
+    }
   }
 
   public static int getScore(String plaintext, ArrayList<String> wordlist) {
+    plaintext = plaintext.toLowerCase();
     int score = 0;
     for (int words = 0; words < wordlist.size(); words++) {
       if (plaintext.contains(wordlist.get(words))) {
@@ -144,8 +152,6 @@ public class Hill {
     }
     return score;
   }
-
-
 
   public static String matrixToText(Matrix matrix){
     StringBuilder key = new StringBuilder();

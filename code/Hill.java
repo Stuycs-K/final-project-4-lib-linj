@@ -30,8 +30,6 @@ public class Hill {
       int keySize = Integer.parseInt(args[4]);
       // if the output doesn't make sense, it means the keysize is likely wrong. guess again!
 
-      // ArrayList<Character> skippedChars = getSkippedChars(args[3]);
-      // ArrayList<Integer> skippedIndices = getSkippedIndices(args[3]);
       knownPlaintextAttack(cribPlain, cribCipher, filepath, keySize);
     }
   }
@@ -47,32 +45,26 @@ public class Hill {
     }
 
     Matrix P = toMatrix(cribPlain, keySize);
-    System.out.println("P " + cribPlain);
-    System.out.println(P);
+    // System.out.println("P " + cribPlain);
+    // System.out.println(P);
 
     Matrix C = toMatrix(cribCipher, keySize);
-    System.out.println("C " + cribCipher);
-    System.out.println(C);
+    // System.out.println("C " + cribCipher);
+    // System.out.println(C);
 
     // get P^(-1)
-    // Matrix inverseP = P.getInverse().scalarMult(P.getDeterminant()).matrixMod(26);
     Matrix inverseP = P.getModularInverseMatrix(26).matrixMod(26);
-    // Matrix inverseP = P.getInverse().scalarMult(getMultModInverse((int)P.getDeterminant(), 26));
-    System.out.println("inverseP");
-    System.out.println(inverseP);
-
-    // System.out.println(inverseP.mult(P));
-    // K = C * P^(-1)
+    // System.out.println("inverseP");
+    // System.out.println(inverseP);
 
     // P * K = C (mod 26)
     // K = P^(-1) * C (mod 26)
     Matrix keyMatrix = inverseP.mult(C);
     keyMatrix = keyMatrix.matrixMod(26);
-    System.out.println("keyMatrix");
     keyMatrix = new Matrix(Matrix.transpose(keyMatrix.m));
-    System.out.println(keyMatrix);
+    // System.out.println(keyMatrix);
     String key = matrixToText(keyMatrix);
-    System.out.println("key: " + key);
+    System.out.println("Key: " + key);
 
     // decode ciphertext with newly obtained key matrix
     System.out.println(decode(contents, key, skippedChars, skippedIndices));

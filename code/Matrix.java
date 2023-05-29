@@ -145,7 +145,7 @@ public class Matrix{
     int determinant = ((int)getDeterminant() % modVal + modVal) % modVal;
     int determinantInv = modInverse(determinant, modVal);
     if (determinantInv == -1){
-      System.out.println("mod inverse doesn't exist for matrix");
+      System.out.println("A modular inverse matrix doesn't exist for this plaintext crib.");
       System.exit(0);
     }
 
@@ -175,7 +175,7 @@ public class Matrix{
         return i;
       }
     }
-    System.out.println("modular inverse of val " + n + " doesn't exist");
+    System.out.println("A modular inverse of val " + n + " doesn't exist.");
     return -1;
   }
 

@@ -1,26 +1,26 @@
 # Hill Cipher
 
 ## Project Description
-We will develop a working encoder and decoder for the Hill Cipher, a cryptography method that utilizes matrix multiplication and linear algebra. We will also develop a bruteforcer that attempts every 2 by 2 matrix key and compares it with a wordlist to return the best possible key and decrypted message. A known-plaintext attack will also be developed where we utilize the weaknesses of the Hill Cipher to figure out the n by n matrix key.
+This is a working encoder and decoder for the Hill Cipher, a cryptography method that utilizes matrix multiplication and linear algebra. Also developed is a bruteforcer that attempts every 2 by 2 matrix key and compares it with a wordlist to return the best possible key and decrypted message. A known-plaintext attack is also developed where we utilize the weaknesses of the Hill Cipher to figure out and decode a given message with a n by n matrix key.
 
 ## Directions
-Clone the repository with 
+Clone the repository with
 ```
 git clone git@github.com:Stuycs-K/final-project-4-lib-linj.git
 ```
 
-Compile all the necessary files with
+`cd` to the `code` directory to use the Hill Cipher methods.
 ```
-javac *.java
-```
-
-```
-java Hill encode [plaintextFile] [keyFile]
-java Hill decode [ciphertextFile] [keyFile]
-java Hill bruteforce [ciphertextFile] [wordlist]
-java Hill known-plaintext [cribPlainFile] [cribCipherFile] [fullCipherFile] [keySize]
+cd code
 ```
 
+Using the included makefile, you can use the developed methods via the following:
+```
+make encode ARGS="[plaintextFile] [keyFile]"
+make decode ARGS="[ciphertextFile] [keyFile]"
+make bruteforce ARGS="[ciphertextFile] [wordlistFile]"
+make known-plaintext ARGS="[cribPlaintextFile] [cribCiphertextFile] [fullCiphertextFile] [size of block]"
+```
 
 ## Links
 [Presentation](https://github.com/Stuycs-K/final-project-4-lib-linj/blob/main/PRESENTATION.md)  

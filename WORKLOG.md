@@ -21,16 +21,21 @@
 
 ### 05/24/2023
 
-- Started working on known-plaintext attack method of decryption. 
+- Started working on known-plaintext attack method of decryption.
   - Utilizes matrix inversion methodology.
 
 ### 05/25/2023
 
-- Continued working on known-plaintext attack method. 
+- Continued working on known-plaintext attack method.
 - Developed method to retrieve a modular inverse matrix of an existing matrix
 
 ### 05/26/2023
  - Fixed known-plaintext attack.
+
+### 05/29/2023
+- General code cleanup, removed unnecessary files, print statements, etc.
+- Developed makefile.
+- Updated README.md
 
 ## Jason Lin
 
@@ -55,7 +60,7 @@
  - Found more information regarding finding a modular multiplicative inverse.
     - [Extended Euclidean Algorithm](https://www.extendedeuclideanalgorithm.com/xea.php)  
  - Working decrypt by applying the extended euclidean algorithm to find the appropriate matrix used for decrypting.
- - Fixed decoding not working in certain cases because of sign issues. 
+ - Fixed decoding not working in certain cases because of sign issues.
     - [Dcode Matrix Inverse](https://www.dcode.fr/matrix-inverse)  
 
 ### 05/24/2023

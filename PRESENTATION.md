@@ -306,4 +306,16 @@ $\bigl(\begin{smallmatrix}
 \end{smallmatrix} \bigr)$
 would also not work since its determinant is 0 which means it has no inverse.
 
+After decrypting with all the possible keys, the best possible solutions can be found by either comparing it to a wordlist or using frequency analysis. 
+
+A wordlist approach, which we used, works if you know the text contains these words. However, different decryption matrixes can generate the same word and so a sufficient wordlist is one that contains at least two words that the original text contains. 
+
+A frequency analysis approach also works but fails on shorter text lengths or specially customized messages.
+
+Bruteforcing a 
+$\bigl(\begin{smallmatrix}
+a&b&c \\ d&e&f \\ g&h&i
+\end{smallmatrix} \bigr)$
+or a higher dimension matrix becomes a lot more time consuming. $26^4=456,976$ but $26^9=5,429,503,678,976$ and $26^{16}$ has 23 significant figures. Instead of bruteforcing these, a known-plaintext attack would be faster. 
+
  ### Known Plaintext Attack

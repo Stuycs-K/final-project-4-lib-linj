@@ -37,6 +37,9 @@
 - Developed makefile.
 - Updated README.md
 
+### 05/30/2023
+- Developed TryHackMe room for homework.
+
 ## Jason Lin
 
 ### 05/18/2023

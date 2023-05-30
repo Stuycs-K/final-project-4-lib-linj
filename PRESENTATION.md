@@ -275,6 +275,7 @@ $\bigl(\begin{smallmatrix}
 a&b \\ c&d
 \end{smallmatrix} \bigr)$
 this would be from AAAA 
+
 $\bigl(\begin{smallmatrix}
 0&0 \\ 0&0
 \end{smallmatrix} \bigr)$

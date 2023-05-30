@@ -330,7 +330,7 @@ public class Hill {
         k = new Matrix(mat);
 
         if (!k.isCoprimeWith(26) || k.getDeterminant()==0) {
-            System.out.println("Invalid Key since determinant is a factor of 26 or determinant is 0.\n" + "Determinant: " + k.getDeterminant());
+            System.out.println("Invalid Key since the greatest common factor between the determinant and 26 is not 1 or determinant is 0.\n" + "Determinant: " + k.getDeterminant());
             System.exit(0);
         }
     }

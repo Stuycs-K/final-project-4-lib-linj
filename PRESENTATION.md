@@ -192,7 +192,7 @@ $$
  
  - Now that we have the key we can decrypt the message CONM back into CATS.
 $$
- \mathit{CONM}
+\mathit{CONM}
  \rightarrow
  \begin{pmatrix}
     {C}\\
@@ -212,7 +212,7 @@ $$
  \begin{pmatrix}
     {13}\\
     {12}
- \end{pmatrix}
+\end{pmatrix}
 $$
 
 $$
@@ -270,20 +270,11 @@ $$
 $$
 
  ### Bruteforce
-To bruteforce an encrypted message one would have to try all possible key combinations. For a 2 by 2 matrix 
-$(\begin{smallmatrix}
-a&b \\ c&d
-\end{smallmatrix})$
-this would be from AAAA 
-
-$\bigl(\begin{smallmatrix}
-0&0 \\ 0&0
-\end{smallmatrix} \bigr)$
-to ZZZZ
-$\bigl(\begin{smallmatrix}
-25&25 \\ 25&25
-\end{smallmatrix} \bigr)$
-, a total of $ 26^4 $ combinations. Of those $ 26^4 $ combinations roughly a third of them can be used as a key to encrypt and decrypt.  
+To bruteforce an encrypted message one would have to try all possible key combinations. For a 2 by 2 matrix this would be from AAAA to ZZZZ, a total of 
+$26^4$
+combinations. Of those 
+$26^4$
+combinations roughly a third of them can be used as a key to encrypt and decrypt.  
 
 The encrypting matrix for a key only exists if
  - The matrix has an inverse which is true if and only if the determinant is not zero.

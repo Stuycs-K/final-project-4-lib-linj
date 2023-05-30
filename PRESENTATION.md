@@ -143,5 +143,60 @@ $$
 \end{pmatrix}
 $$
 
-
  ### Decryption
+To decrypt a message, the ciphertext is turned back into a matrix and multiplied by the modular inverse matrix of the key.
+
+ - If the key if BRUH, the modular inverse the key would be found by doing the following steps.
+
+$$
+K=
+\begin{pmatrix}
+{1} & {17} \\
+{20} & {7}
+\end{pmatrix}
+$$
+
+$$
+\mathrm{DET(A)} = 7 - 340 = -333
+$$
+
+$$
+\mathrm{(-333)}\mathit{x}
+\equiv
+\mathrm{1} 
+\bmod{26}
+$$
+
+$$ x =-5
+$$
+
+$$
+K^{-1}=-333^{-1}
+\times
+ \begin{pmatrix}
+    {1} & {17} \\
+    {20} & {7} 
+ \end{pmatrix} 
+ ^{-1} =
+ (-5) \times
+\begin{pmatrix}
+    {7} & {-17} \\
+    {-20} & {1}
+\end{pmatrix} =
+\begin{pmatrix} 
+    {17} & {7} \\
+    {22} & {21}
+\end{pmatrix}
+\bmod{26}
+$$
+ 
+ - Now that we have the key we can decrypt the message CONM back into CATS.
+ 
+
+
+
+
+ ### Bruteforce
+
+
+ ### Known Plaintext Attack

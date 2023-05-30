@@ -271,9 +271,9 @@ $$
 
  ### Bruteforce
 To bruteforce an encrypted message one would have to try all possible key combinations. For a 2 by 2 matrix 
-$\bigl(\begin{smallmatrix}
+$(\begin{smallmatrix}
 a&b \\ c&d
-\end{smallmatrix} \bigr)$
+\end{smallmatrix})$
 this would be from AAAA 
 
 $\bigl(\begin{smallmatrix}

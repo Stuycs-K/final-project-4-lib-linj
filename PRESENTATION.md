@@ -293,11 +293,11 @@ $\bigl(\begin{smallmatrix}
 \end{smallmatrix}\bigr)$
 would not work since the determinant is 80 which is a multiple of 2.
 
-The key ACAT 
-$\bigl(\begin{smallmatrix}
+The key ACAT would also not work since its determinant is 0 which means it has no inverse.
+
+$$\bigl(\begin{smallmatrix}
 0&2 \\ 0&19
-\end{smallmatrix} \bigr)$
-would also not work since its determinant is 0 which means it has no inverse.
+\end{smallmatrix} \bigr)$$
 
 After decrypting with all the possible keys, the best possible solutions can be found by either comparing it to a wordlist or using frequency analysis. 
 
@@ -305,10 +305,6 @@ A wordlist approach, which we used, works if you know the text contains these wo
 
 A frequency analysis approach also works but fails on shorter text lengths or specially customized messages.
 
-Bruteforcing a 
-$\bigl(\begin{smallmatrix}
-a&b&c \\ d&e&f \\ g&h&i
-\end{smallmatrix} \bigr)$
-or a higher dimension matrix becomes a lot more time consuming. $26^4=456,976$ but $26^9=5,429,503,678,976$ and $26^{16}$ has 23 significant figures. Instead of bruteforcing these, a known-plaintext attack would be faster. 
+Bruteforcing a 3 by 3 matrix or a higher dimension matrix becomes a lot more time consuming. $26^4=456,976$ but $26^9=5,429,503,678,976$ and $26^{16}$ has 23 significant figures. Instead of bruteforcing these, a known-plaintext attack would be faster. 
 
  ### Known Plaintext Attack

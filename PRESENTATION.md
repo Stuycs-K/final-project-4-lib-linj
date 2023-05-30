@@ -191,8 +191,9 @@ K^{-1}=-333^{-1}
 $$
  
  - Now that we have the key we can decrypt the message CONM back into CATS.
+
 $$
-\mathit{CONM}
+ \mathit{CONM}
  \rightarrow
  \begin{pmatrix}
     {C}\\
@@ -212,7 +213,7 @@ $$
  \begin{pmatrix}
     {13}\\
     {12}
-\end{pmatrix}
+ \end{pmatrix}
 $$
 
 $$
@@ -288,8 +289,8 @@ where $\mathit {a}$ is the determinant of the key matrix. In other words, the de
 
 The key KEYS 
 $\bigl(\begin{smallmatrix}
-10&4 \\ 25&18
-\end{smallmatrix} \bigr)$
+10&4\\25&18
+\end{smallmatrix}\bigr)$
 would not work since the determinant is 80 which is a multiple of 2.
 
 The key ACAT 

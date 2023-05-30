@@ -88,9 +88,6 @@ public class Hill {
     ArrayList<String> wordsToCheck = readWordList(wordlist);
     ArrayList<Character> skippedChars = getSkippedChars(filepath);
     ArrayList<Integer> skippedIndices = getSkippedIndices(filepath);
-    // int maxScore = 0;
-    // String bestKey = "";
-    // int score = 0;
     ArrayList<Matrix> matrixList= new ArrayList<Matrix>();
 
     // iterate thru all possible keys (given coprime w/ 26)
@@ -109,24 +106,6 @@ public class Hill {
     }
 
     Collections.sort(matrixList, Comparator.comparingInt((Matrix matrix) -> getScore(decode(contents, matrixToText(matrix), skippedChars, skippedIndices), wordsToCheck)).reversed());
-
-    // for (int keys = 0; keys < matrixList.size(); keys++) {
-    //   // optimization: key determinant must be coprime with 26
-    //   Matrix tempKey = matrixList.get(keys);
-    //   String key = matrixToText(tempKey);
-    //   String decrypted = decode(contents, key, skippedChars, skippedIndices);
-    //   String temp = decrypted.toLowerCase();
-    //   score = getScore(temp, wordsToCheck);
-    //   if (score > maxScore) {
-    //     maxScore = score;
-    //     bestKey = key;
-    //   }
-    //   score = 0;
-    // }
-
-    // System.out.println("Key: " + bestKey);
-    // System.out.println("Decrypted: " + decode(contents, bestKey, skippedChars, skippedIndices));
-    // System.out.println();
 
     System.out.println("Best Matches");
     for (int i = 0; i < amount; i++) {

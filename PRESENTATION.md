@@ -146,7 +146,7 @@ $$
  ### Decryption
 To decrypt a message, the ciphertext is turned back into a matrix and multiplied by the modular inverse matrix of the key.
 
- - If the key if BRUH, the modular inverse the key would be found by doing the following steps.
+ - If the key is BRUH, the modular inverse the key would be found by doing the following steps.
 
 $$
 K=
@@ -164,7 +164,7 @@ $$
 \mathrm{(-333)}\mathit{x}
 \equiv
 \mathrm{1} 
-\bmod{26}
+\pmod{26}
 $$
 
 $$ x =-5
@@ -187,16 +187,123 @@ K^{-1}=-333^{-1}
     {17} & {7} \\
     {22} & {21}
 \end{pmatrix}
-\bmod{26}
+\pmod{26}
 $$
  
  - Now that we have the key we can decrypt the message CONM back into CATS.
- 
+$$
+ \mathit{CONM}
+ \rightarrow
+ \begin{pmatrix}
+    {C}\\
+    {O}
+ \end{pmatrix}
+ \mathit{,}
+ \begin{pmatrix}
+    {N}\\
+    {M}
+ \end{pmatrix}
+ \rightarrow
+ \begin{pmatrix}
+    {2}\\
+    {14}
+ \end{pmatrix}
+ \mathit{,}
+ \begin{pmatrix}
+    {13}\\
+    {12}
+ \end{pmatrix}
+$$
 
+$$
+ \begin{pmatrix}
+     {17} & {7}\\ 
+     {22} & {21}
+ \end{pmatrix}
+ \times
+ \begin{pmatrix}
+    {2}\\
+    {14}
+\end{pmatrix}= 
+\begin{pmatrix}
+    {132} \\
+    {338}
+\end{pmatrix}
+\equiv
+\begin{pmatrix}
+    {2} \\
+    {0}
+\end{pmatrix}
+\pmod{26}
+\rightarrow
+\begin{pmatrix}
+    {C} \\
+    {A}
+\end{pmatrix}
+$$
 
-
+$$
+ \begin{pmatrix}
+     {17} & {7}\\ 
+     {22} & {21}
+ \end{pmatrix}
+ \times
+ \begin{pmatrix}
+    {13}\\
+    {12}
+\end{pmatrix}= 
+\begin{pmatrix}
+    {305} \\
+    {538}
+\end{pmatrix}
+\equiv
+\begin{pmatrix}
+    {19} \\
+    {18}
+\end{pmatrix}
+\pmod{26}
+\rightarrow
+\begin{pmatrix}
+    {T} \\
+    {S}
+\end{pmatrix}
+$$
 
  ### Bruteforce
+To bruteforce an encrypted message one would have to try all possible key combinations. For a 2 by 2 matrix 
+$\bigl(\begin{smallmatrix}
+a&b \\ c&d
+\end{smallmatrix} \bigr)$
+this would be from AAAA 
+$\bigl(\begin{smallmatrix}
+0&0 \\ 0&0
+\end{smallmatrix} \bigr)$
+to ZZZZ
+$\bigl(\begin{smallmatrix}
+25&25 \\ 25&25
+\end{smallmatrix} \bigr)$
+, a total of $ 26^4 $ combinations. Of those $ 26^4 $ combinations roughly a third of them can be used as a key to encrypt and decrypt.  
 
+The encrypting matrix for a key only exists if
+ - The matrix has an inverse which is true if and only if the determinant is not zero.
+ - There exists a value $\mathit {x}$ such that 
+$\mathit {ax} 
+\equiv 1
+    \pmod{26}
+$
+where $\mathit {a}$ is the determinant of the key matrix. In other words, the determinant must not have any common factors with the modular base, in this case 26 for 26 letters, besides 1. 
+   - The determinant must not be a multiple of 2 or 13 in this case.  
+
+The key KEYS 
+$\bigl(\begin{smallmatrix}
+10&4 \\ 25&18
+\end{smallmatrix} \bigr)$
+would not work since the determinant is 80 which is a multiple of 2.
+
+The key ACAT 
+$\bigl(\begin{smallmatrix}
+0&2 \\ 0&19
+\end{smallmatrix} \bigr)$
+would also not work since its determinant is 0 which means it has no inverse.
 
  ### Known Plaintext Attack

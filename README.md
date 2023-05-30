@@ -18,7 +18,7 @@ Using the included makefile, you can use the developed methods via the following
 ```
 make encode ARGS="[plaintextFile] [keyFile]"
 make decode ARGS="[ciphertextFile] [keyFile]"
-make bruteforce ARGS="[ciphertextFile] [wordlistFile]"
+make bruteforce ARGS="[ciphertextFile] [wordlistFile] [number of best attempts to print out]"
 make known-plaintext ARGS="[cribPlaintextFile] [cribCiphertextFile] [fullCiphertextFile] [size of block]"
 ```
 

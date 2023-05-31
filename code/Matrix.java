@@ -256,7 +256,7 @@ public class Matrix{
 
   // check if matrix's determinant is coprime with a val
   public boolean isCoprimeWith(int val){
-    int determinant = (int)getDeterminant();
+    int determinant = Math.abs((int)getDeterminant());
     return (gcd(determinant, val) == 1);
   }
 

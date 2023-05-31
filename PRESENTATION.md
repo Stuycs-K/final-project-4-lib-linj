@@ -280,24 +280,29 @@ combinations roughly a third of them can be used as a key to encrypt and decrypt
 The encrypting matrix for a key only exists if
  - The matrix has an inverse which is true if and only if the determinant is not zero.
  - There exists a value $\mathit {x}$ such that 
-$\mathit {ax} 
-\equiv 1
-    \pmod{26}
-$
-where $\mathit {a}$ is the determinant of the key matrix. In other words, the determinant must not have any common factors with the modular base, in this case 26 for 26 letters, besides 1. 
+$\mathit{ax}\equiv 1\pmod{26}$
+where 
+$\mathit{a}$
+is the determinant of the key matrix. In other words, the determinant must not have any common factors with the modular base, in this case 26 for 26 letters, besides 1. 
    - The determinant must not be a multiple of 2 or 13 in this case.  
 
-The key KEYS 
-$\bigl(\begin{smallmatrix}
-10&4\\25&18
-\end{smallmatrix}\bigr)$
-would not work since the determinant is 80 which is a multiple of 2.
+The key KEYS would not work since the determinant is 80 which is a multiple of 2.
+
+$$
+\begin{pmatrix}
+10&4 \\
+25&18
+\end{pmatrix}
+$$
 
 The key ACAT would also not work since its determinant is 0 which means it has no inverse.
 
-$$\bigl(\begin{smallmatrix}
-0&2 \\ 0&19
-\end{smallmatrix} \bigr)$$
+$$
+\begin{pmatrix}
+0&2 \\ 
+0&19
+\end{pmatrix}
+$$
 
 After decrypting with all the possible keys, the best possible solutions can be found by either comparing it to a wordlist or using frequency analysis. 
 

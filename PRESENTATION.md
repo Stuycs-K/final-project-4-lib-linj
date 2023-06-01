@@ -312,4 +312,73 @@ A frequency analysis approach also works but fails on shorter text lengths or sp
 
 Bruteforcing a 3 by 3 matrix or a higher dimension matrix becomes a lot more time consuming. $26^4=456,976$ but $26^9=5,429,503,678,976$ and $26^{16}$ has 23 significant figures. Instead of bruteforcing these, a known-plaintext attack would be faster. 
 
- ### Known Plaintext Attack
+ ### Known-Plaintext Attack
+ The known-plaintext attack is a vulnerability that the Hill Cipher is susceptible to. Essentially, it means that if we *know* the *plaintext* of a certain part of our ciphertext (known as the *crib*), we are then able to find the key matrix that was used to encrypt the message and, therefore, how to decrypt it. The Hill Cipher is vulnerable to the attack because the matrix operations that it uses to encode and decode information is **linear**. In other words, the operations it uses are relatively easy to break down and apply general rules to. 
+ 
+ When a message is encrypted using an *N* x *N* key matrix, it means that it may be possible to solve for the key if we have *N* pairs of  unique plaintext-ciphertext blocks containing *N* elements. 
+ 
+ We can take our plaintext letters and turn them into an *N* x *N* matrix, which we can call **P**.
+ We do the same with our ciphertext letters and call that **C**.
+ And we have our key matrix, which we can call **K**.
+ 
+ It tracks, then, that under the rules of the Hill Cipher:
+ <p align="center">$$PK = C \pmod{26}$$</p>
+ If we take our plaintext and multiply it by the key matrix, we end up with our ciphertext.
+And since we know what makes up **P** and **C**, we can solve for **K** using some algebra, so:
+<p align="center">$$K = P^{-1}C \pmod{26}$$</p>
+So it makes sense that if we take the inverse of the crib plaintext matrix and multiply it by the crib ciphertext matrix, we can get the key matrix.
+
+As an example, let's take the ciphertext `BZGF TTXM, DRME`. Let's say we know for a fact that this is a letter to someone, and therefore it's safe to assume the plaintext starts with `DEAR`. It makes sense that the message is encrypted using a **2** x **2** key matrix, because of the size of the message. So,
+
+$$
+P = \begin{pmatrix}
+D & E\\ 
+A & R
+\end{pmatrix} \pmod{26}= \begin{pmatrix}
+3 & 4\\ 
+0 & 17
+\end{pmatrix} \pmod{26}
+$$
+
+$$
+C = \begin{pmatrix}
+B & Z\\ 
+G & F
+\end{pmatrix} \pmod{26} = \begin{pmatrix}
+1 & 25\\ 
+6 & 5
+\end{pmatrix} \pmod{26}
+$$
+
+$$
+\begin{pmatrix}
+3 & 4\\ 
+0 & 17
+\end{pmatrix}
+K = \begin{pmatrix}
+1 & 25\\ 
+6 & 5
+\end{pmatrix} \pmod{26}
+$$
+
+Because we are looking for the inverse of **P** in modulo 26, we are looking for the matrix modular inverse of **P** modulo 26. 
+
+$$
+P^{-1} = (\textup{det}(P))^{-1} \cdot \textup{adj}(P) \pmod{26} = (51)^{-1} \cdot \begin{pmatrix}
+17 & -4\\ 
+0 & 3
+\end{pmatrix} \pmod{26}
+= 25 \cdot \begin{pmatrix}
+17 & -4\\ 
+0 & 3
+\end{pmatrix} \pmod{26} 
+$$
+$$
+= \begin{pmatrix}
+425 & -100\\ 
+0 & 75
+\end{pmatrix} \pmod{26} = \begin{pmatrix}
+9 & 4\\ 
+0 & 23
+\end{pmatrix} \pmod{26}
+$$

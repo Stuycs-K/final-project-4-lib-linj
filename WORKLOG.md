@@ -40,6 +40,10 @@
 ### 05/30/2023
 - Developed TryHackMe room for homework.
 
+### 05/31/2023
+- Finished writeup for known-plaintext attack in PRESENTATION.md
+- Bugfixes in code
+
 ## Jason Lin
 
 ### 05/18/2023

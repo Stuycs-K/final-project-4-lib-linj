@@ -240,17 +240,11 @@ public class Hill {
      * Then mod each value by 26.
      */
 
-     double det = k.getDeterminant();
-    //  System.out.println("Original\n" + k);
-     k = k.getInverse();
-    //  System.out.println("Inverse\n" + k);
-     k = k.scalarMult(det);
-    //  System.out.println("Determinant: " + det);
-    //  System.out.println("Scalar Mult\n" + k);
+     double det = (k.getDeterminant() % 26 + 26) % 26;
      int modular = getMultModInverse((int)det, 26);
-    //  System.out.println("Modular: " + modular);
-     k = k.scalarMult((double)modular);
-     k = k.matrixMod(26);
+     Matrix adj = k.getInverse().scalarMult(k.getDeterminant()).matrixMod(26);
+     k = adj.scalarMult(modular).matrixMod(26);
+
 
     while (contents.length() % k.r != 0) {
         contents += "z";

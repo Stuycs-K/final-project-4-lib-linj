@@ -322,11 +322,12 @@ Bruteforcing a 3 by 3 matrix or a higher dimension matrix becomes a lot more tim
  And we have our key matrix, which we can call **K**.
  
  It tracks, then, that under the rules of the Hill Cipher:
- <p align="center">$$PK = C \pmod{26}$$</p>
+ $$PK = C \pmod{26}$$
  If we take our plaintext and multiply it by the key matrix, we end up with our ciphertext.
 And since we know what makes up **P** and **C**, we can solve for **K** using some algebra, so:
-<p align="center">$$K = P^{-1}C \pmod{26}$$</p>
+$$K = P^{-1}C \pmod{26}$$
 So it makes sense that if we take the inverse of the crib plaintext matrix and multiply it by the crib ciphertext matrix, we can get the key matrix.
+The produced key matrix does not follow the same order as our plaintext and ciphertext matrices, so it is necessary to transpose the key matrix before converting it back to text.
 
 As an example, let's take the ciphertext `BZGF TTXM, DRME`. Let's say we know for a fact that this is a letter to someone, and therefore it's safe to assume the plaintext starts with `DEAR`. It makes sense that the message is encrypted using a **2** x **2** key matrix, because of the size of the message. So,
 
@@ -367,14 +368,15 @@ $$
 P^{-1} = (\textup{det}(P))^{-1} \cdot \textup{adj}(P) \pmod{26} = (51)^{-1} \cdot \begin{pmatrix}
 17 & -4\\ 
 0 & 3
-\end{pmatrix} \pmod{26}
+\end{pmatrix} \pmod{26} \\
 = 25 \cdot \begin{pmatrix}
 17 & -4\\ 
 0 & 3
 \end{pmatrix} \pmod{26} 
 $$
+
 $$
-= \begin{pmatrix}
+P^{-1} = \begin{pmatrix}
 425 & -100\\ 
 0 & 75
 \end{pmatrix} \pmod{26} = \begin{pmatrix}
@@ -382,3 +384,43 @@ $$
 0 & 23
 \end{pmatrix} \pmod{26}
 $$
+
+$$
+K = \begin{pmatrix}
+9 & 4\\ 
+0 & 23
+\end{pmatrix}\begin{pmatrix}
+1 & 25\\ 
+6 & 5
+\end{pmatrix} \pmod{26}
+= \begin{pmatrix}
+33 & 245\\ 
+138 & 115
+\end{pmatrix} \pmod{26}
+= \begin{pmatrix}
+7 & 11\\ 
+8 & 11
+\end{pmatrix} \pmod{26} 
+$$
+
+$$
+K' = \textup{transpose}(K) = \begin{pmatrix}
+7 & 8\\ 
+11 & 11
+\end{pmatrix} \pmod{26} = \begin{pmatrix}
+H & I\\ 
+L & L
+\end{pmatrix}
+$$
+
+In the end, we were able to break the code and get our key as `HILL`. Upon decoding the entire message with `HILL`, we get the full message is `DEAR JOHN, HEYA`.
+
+With that said, there are still a few caveats to this method of known-plaintext attack:
+- The crib plaintext matrix *MUST* be invertible.
+- The determinant of the crib plaintext matrix *MUST* be coprime with 26.
+
+Therefore, it is better to have as many plaintext-ciphertext pairs as you can to avoid any potential hiccups. Likewise, it is better to have a longer key matrix so more plaintext-ciphertext pairs are required to perform a known-plaintext attack.
+
+It is worth noting that this same method of cracking the key matrix may also be done with a large enough ciphertext in a ciphertext-only attack, where the attacker can use strategies such as frequency analysis to guess-and-check for some plaintext-ciphertext pairs before applying the matrix inversion method.
+
+But in general, because of the glaring vulnerabilities of the Hill Cipher, it is better to use it as **a part** of a larger cryptographic algorithm, rather than as a standalone cipher.

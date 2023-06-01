@@ -1,4 +1,5 @@
 # Hill Cipher
+## Team Bing Chilling -- Brian Li and Jason Lin
 
 ## Project Description
 This is a working encoder and decoder for the Hill Cipher, a cryptography method that utilizes matrix multiplication and linear algebra. Also developed is a bruteforcer that attempts every 2 by 2 matrix key and compares it with a wordlist to return the best possible key and decrypted message. A known-plaintext attack is also developed where we utilize the weaknesses of the Hill Cipher to figure out and decode a given message with a n by n matrix key.

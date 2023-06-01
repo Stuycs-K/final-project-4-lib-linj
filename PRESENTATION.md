@@ -306,7 +306,7 @@ $$
 
 After decrypting with all the possible keys, the best possible solutions can be found by either comparing it to a wordlist or using frequency analysis. 
 
-A wordlist approach, which we used, works if you know the text contains these words. However, different decryption matrixes can generate the same word and so a sufficient wordlist is one that contains at least two words that the original text contains. 
+A wordlist approach, which we used, works if you know the text contains these words. However, different decryption matrices can generate the same word and so a sufficient wordlist is one that contains at least two words that the original text contains. 
 
 A frequency analysis approach also works but fails on shorter text lengths or specially customized messages.
 

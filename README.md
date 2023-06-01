@@ -25,4 +25,4 @@ make known-plaintext ARGS="[cribPlaintextFile] [cribCiphertextFile] [fullCiphert
 
 ## Links
 [Presentation](https://github.com/Stuycs-K/final-project-4-lib-linj/blob/main/PRESENTATION.md)  
-[Homework]()
+[Homework](https://github.com/Stuycs-K/final-project-4-lib-linj/blob/main/HOMEWORK.md)

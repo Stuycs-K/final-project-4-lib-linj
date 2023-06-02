@@ -156,18 +156,24 @@ K=
 \end{pmatrix}
 $$
 
+
 $$
 \mathrm{DET(A)} = 7 - 340 = -333
 $$
 
 $$
-\mathrm{(-333)}\mathit{x}
+(-333)
+\bmod{26} = 21
+$$
+
+$$
+\mathrm{(21)}\mathit{x}
 \equiv
 \mathrm{1} 
 \pmod{26}
 $$
 
-$$ x =-5
+$$ x =5
 $$
 
 $$
@@ -178,10 +184,10 @@ K^{-1}=-333^{-1}
     {20} & {7} 
  \end{pmatrix} 
  ^{-1} =
- (-5) \times
+ (5) \times
 \begin{pmatrix}
-    {7} & {-17} \\
-    {-20} & {1}
+    {-7} & {17} \\
+    {20} & {-1}
 \end{pmatrix} =
 \begin{pmatrix} 
     {17} & {7} \\

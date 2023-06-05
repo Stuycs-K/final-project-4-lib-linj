@@ -1,10 +1,4 @@
 # Homework
-
-Complete the following tryhackme room. 
-https://tryhackme.com/room/hillcipherfundamentalsnu
-
-Since the room isn't public yet.
-
 Deliverables: txt file on google classroom with the answers
 
 ### TASK 1
